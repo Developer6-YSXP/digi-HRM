@@ -1,0 +1,382 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Leaves</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="routes.adminDashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Leaves</li>
+        </ul>
+      </div>
+      <div class="col-auto float-end ms-auto d-flex gap-3">
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-white" (click)="exportToExcel()">Excel</button>
+          <button class="btn btn-white" (click)="exportToPdf()">PDF</button>
+        </div>
+        <a class="btn add-btn" (click)="addLeave()"
+          ><i class="la la-plus-circle"></i> Add Leave</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Leave Statistics -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+            <h2 class="m-b-20 text-white">Annual Leave</h2>
+            <h2 class="text-right text-white">12</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
+              <path
+                d="M13 0C5.826 0 0 5.826 0 13s5.826 13 13 13 13-5.826 13-13S20.174 0 13 0zm0 1c6.633 0 12 5.367 12 12s-5.367 12-12 12S1 19.633 1 13 6.367 1 13 1zM9 5v1H7v15h12V6h-2V5H9zm1 1h6v2h-6V6zM8 7h1v2h8V7h1v13H8V7zm1 4v1h1v-1H9zm2 0v1h6v-1h-6zm-2 3v1h1v-1H9zm2 0v1h6v-1h-6zm-2 3v1h1v-1H9zm2 0v1h6v-1h-6z"
+                color="#000"
+                font-family="Sans"
+                font-weight="400"
+                overflow="visible"
+                style="
+                  line-height: normal;
+                  -inkscape-font-specification: Sans;
+                  text-indent: 0;
+                  text-align: start;
+                  text-decoration-line: none;
+                  text-transform: none;
+                  marker: none;
+                "
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-green order-card">
+          <div class="card-block">
+            <h2 class="m-b-20 text-white">Medical Leave</h2>
+            <h2 class="text-right text-white">4</h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              data-name="Layer 1"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="m435.19 382.037 68.707-79.987a39.256 39.256 0 0 0 7.876-37.035L472.146 132.91a23.927 23.927 0 0 0-46.836 6.81c0 .56.017 1.12.057 1.633l5.522 80.524a19.146 19.146 0 0 0-14.815 5.186l-67.82 64.67a78.73 78.73 0 0 0-24.314 56.707v61.849a28.387 28.387 0 0 0-13.97 24.417V504.5a7.5 7.5 0 0 0 15 0v-51.75H425.31v51.75a7.5 7.5 0 0 0 15 0v-69.794a28.375 28.375 0 0 0-13.38-24.055v-6.341a34.21 34.21 0 0 1 8.26-22.273Zm-9.881 55.713H324.97v-3.044a13.461 13.461 0 0 1 13.494-13.396h73.35a13.461 13.461 0 0 1 13.494 13.396Zm-1.5-65.485a49.218 49.218 0 0 0-11.88 32.045v2.003c-.038 0-.076-.003-.115-.003H338.94v-57.87a63.666 63.666 0 0 1 19.665-45.852l67.824-64.672a4.2 4.2 0 0 1 5.853.073l.559.568q.318.319.614.65c.065.08.132.158.2.235a21.937 21.937 0 0 1-1.04 30.158l-37.63 37.1a7.5 7.5 0 0 0 10.53 10.68l37.632-37.1a36.939 36.939 0 0 0 3.443-48.696l-6.263-91.321a7.27 7.27 0 0 1-.017-.543 8.928 8.928 0 0 1 17.466-2.505l39.63 132.11a24.323 24.323 0 0 1-4.885 22.948ZM189.5 410.289V347a78.738 78.738 0 0 0-24.314-56.708l-67.818-64.668a19.137 19.137 0 0 0-14.818-5.183l5.516-80.446c.043-.539.064-1.1.064-1.715a23.927 23.927 0 0 0-46.833-6.815L1.666 263.575a39.25 39.25 0 0 0 7.875 37.031l68.709 79.99a34.218 34.218 0 0 1 8.26 22.274v7.782a28.374 28.374 0 0 0-13.378 24.054V504.5a7.5 7.5 0 0 0 15 0v-51.75H188.47v51.75a7.5 7.5 0 0 0 15 0v-69.794a28.387 28.387 0 0 0-13.97-24.417ZM20.917 290.83a24.321 24.321 0 0 1-4.884-22.944l39.633-132.117a8.927 8.927 0 0 1 17.464 2.511c0 .174-.002.347-.023.608l-6.257 91.247a36.948 36.948 0 0 0 3.444 48.706l37.63 37.1a7.5 7.5 0 1 0 10.532-10.682L80.827 268.16a21.95 21.95 0 0 1-1.028-30.184c.256-.291.517-.577.849-.908l.494-.506a4.214 4.214 0 0 1 5.873-.085l67.818 64.668A63.668 63.668 0 0 1 174.5 347v59.31h-72.874c-.04 0-.077.002-.116.003v-3.443a49.227 49.227 0 0 0-11.88-32.047ZM188.47 437.75H88.132v-3.044a13.461 13.461 0 0 1 13.494-13.396h73.349a13.461 13.461 0 0 1 13.495 13.396Zm92.267-164.96c23.471-7.214 42.172-14.704 45.553-28.691a17.178 17.178 0 0 0-2.284-13.594c-5.096-7.958-16.903-13.21-32.407-17.5 25.359-5.96 44.504-13.327 48.212-27.528a15.77 15.77 0 0 0-1.803-12.417c-4.7-7.76-15.822-13.17-37.196-18.09a7.5 7.5 0 0 0-3.365 14.618c21.943 5.052 26.702 9.545 27.73 11.242a.854.854 0 0 1 .12.858c-.465 1.78-3.339 6.51-19.952 11.974-11.71 3.851-26.83 6.973-41.845 9.946v-64.856h72.619l.012.001.022-.001h44.117a11.5 11.5 0 0 0 8.71-19.009l-49.957-57.95A44.872 44.872 0 0 0 284.241 51.2L263.5 61.928V48.85a25 25 0 1 0-15 0v13.08L227.759 51.2a44.873 44.873 0 0 0-54.782 10.593l-49.957 57.95a11.5 11.5 0 0 0 8.71 19.009h44.117l.022.001.012-.001H248.5v64.856c-15.014-2.973-30.135-6.095-41.845-9.946-16.613-5.465-19.487-10.194-19.952-11.975a.852.852 0 0 1 .12-.857c1.028-1.697 5.786-6.19 27.725-11.241a7.5 7.5 0 1 0-3.365-14.617c-21.37 4.92-32.493 10.33-37.19 18.089a15.768 15.768 0 0 0-1.804 12.416c3.708 14.2 22.853 21.569 48.212 27.529-15.504 4.289-27.311 9.54-32.407 17.499a17.178 17.178 0 0 0-2.284 13.594c3.381 13.987 22.082 21.477 45.553 28.692-11.253 4.542-19.807 9.779-23.667 16.947a17.72 17.72 0 0 0-1.341 13.86c3.48 11.388 15.925 18.537 30.78 25.027-15.412 7.752-27.367 17.617-23.86 33.19a7.5 7.5 0 0 0 14.634-3.297c-1.523-6.76 7.227-12.576 20.691-18.724v20.372a7.5 7.5 0 0 0 15 0v-20.372c13.464 6.148 22.214 11.963 20.691 18.724a7.5 7.5 0 1 0 14.633 3.296c3.508-15.572-8.447-25.437-23.858-33.189 14.854-6.49 27.3-13.64 30.78-25.026a17.72 17.72 0 0 0-1.342-13.86c-3.86-7.17-12.414-12.406-23.667-16.948ZM248.5 317.198c-12.682-5.29-25.92-11.504-27.9-17.981a2.709 2.709 0 0 1 .203-2.365c2.75-5.11 14.491-9.957 27.697-14.296Zm0-54.912c-12.137-3.574-24.677-7.27-34.065-11.395-11.766-5.17-13.812-8.937-14.145-10.317a2.221 2.221 0 0 1 .337-1.98c4.42-6.905 26.345-12.274 47.873-16.698Zm0-138.533h-40.076a55.775 55.775 0 0 0 3.794-3.785 57.453 57.453 0 0 0 10.89-17.686 7.5 7.5 0 1 0-13.971-5.46 42.512 42.512 0 0 1-8.048 13.088c-8.639 9.559-19.694 12.767-25.863 13.843h-35.858l44.97-52.164a29.922 29.922 0 0 1 36.53-7.065L248.5 78.817Zm62.873 114.84a2.221 2.221 0 0 1 .337 1.981c-.333 1.38-2.379 5.147-14.145 10.317-9.389 4.125-21.928 7.82-34.065 11.395v-40.39c21.528 4.424 43.452 9.792 47.873 16.698ZM291.132 64.525a29.921 29.921 0 0 1 36.53 7.064l44.97 52.164h-35.858c-6.17-1.076-17.224-4.284-25.863-13.842a42.528 42.528 0 0 1-8.048-13.09 7.5 7.5 0 1 0-13.97 5.461 57.47 57.47 0 0 0 10.89 17.687 55.756 55.756 0 0 0 3.792 3.784H263.5V78.817ZM256 35a10 10 0 1 1 10-10 10.012 10.012 0 0 1-10 10Zm35.4 264.216c-1.98 6.477-15.218 12.691-27.9 17.98v-34.64c13.206 4.338 24.946 9.185 27.697 14.295a2.709 2.709 0 0 1 .202 2.365Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-yellow order-card">
+          <div class="card-block">
+            <h2 class="m-b-20 text-white">Paid Leave</h2>
+            <h2 class="text-right text-white">6</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+              <path
+                d="M17.969 1022.862c-3.603 0-6.469 2.906-6.469 6.5 0 3.596 2.866 6.5 6.469 6.5 3.602 0 6.531-2.907 6.531-6.5 0-3.59-2.93-6.5-6.531-6.5zm-2.5 3h5v1h-1.844c.235.3.391.64.469 1h1.375v1h-1.375a2.49 2.49 0 0 1-1.969 1.938l2.406 2.343-.718.72-3.063-3h-.281v-1H16.5c.933 0 1.423-.452 1.594-1H15.5v-1h2.594c-.17-.55-.66-1-1.594-1h-1.031v-1zm-12.094 11.156c-.216 0-.375.168-.375.407v8.53c0 .24.159.407.375.407h2.344c.216 0 .375-.168.375-.406v-8.531c0-.239-.159-.407-.375-.407H3.375zm28.25.375c-.126-.013-.246.01-.375.031a1.307 1.307 0 0 0-.5.188l-7.063 4.156c-.853 1.11-1.128 1.284-2.625 1.438-1.864.033-3.782.032-5.656.03v-1h5.563c.752 0 1.108-.18 1.375-.374.12-.093.21-.239.312-.375.122-.222.25-.442.25-.813 0-.63-.184-.966-.5-1.219-.316-.253-.818-.406-1.437-.406H18.25c-.716 0-1.473-.259-2.219-.5-.745-.241-1.5-.473-1.937-.5h-2.688c-.808 0-1.522.243-2.187.5-.666.258-1.278.563-1.938.563h-.187v6.218h16.875c.238-.01.42-.044.531-.094h.031c.175-.065.245-.094.25-.094l7.563-4.812c.634-.4.834-1.279.437-1.938l-.187-.343a1.359 1.359 0 0 0-.969-.657z"
+                color="#000"
+                font-family="sans-serif"
+                font-weight="400"
+                overflow="visible"
+                transform="translate(0 -1016.362)"
+                style="
+                  text-indent: 0;
+                  text-align: start;
+                  line-height: normal;
+                  text-transform: none;
+                "
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-pink order-card">
+          <div class="card-block">
+            <h2 class="m-b-20 text-white">Remaining Leave</h2>
+            <h2 class="text-right text-white">5</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path
+                d="M93 48.627h-.5V34.968c0-4.263-3.157-7.792-7.254-8.398v-3.073c0-4.687-3.813-8.5-8.5-8.5H72.98l-1.983-5.285a1.5 1.5 0 0 0-1.864-.901l-19.201 6.186H10.735c-3.989 0-7.235 3.246-7.235 7.235V82.76c0 4.687 3.813 8.5 8.5 8.5h72c4.687 0 8.5-3.813 8.5-8.5V69.101h.5c1.93 0 3.5-1.57 3.5-3.5V52.127c0-1.929-1.57-3.5-3.5-3.5zM74.106 17.998h2.64c3.032 0 5.5 2.467 5.5 5.5v2.971h-4.961l-.299-.797-2.88-7.674zm-4.33-3 2.437 6.494 1.868 4.977H24.109l44.582-14.362 1.085 2.891zm-59.041 3h29.884l-18.84 6.07-7.453 2.401h-3.591c-2.335 0-4.235-1.9-4.235-4.235s1.9-4.236 4.235-4.236zM89.5 82.76c0 3.033-2.468 5.5-5.5 5.5H12a5.506 5.506 0 0 1-5.5-5.5V28.096c.021.016.046.026.068.042.262.185.535.354.821.504.053.028.109.052.163.079.265.131.538.246.82.344.048.017.094.036.142.052.312.101.633.177.962.235.073.013.147.023.221.034.34.049.685.083 1.038.083H84c3.032 0 5.5 2.467 5.5 5.5v13.659h-9.938c-4.687 0-8.5 3.813-8.5 8.5v3.474c0 4.687 3.813 8.5 8.5 8.5H89.5V82.76zm4-17.159a.5.5 0 0 1-.5.5H79.562a5.506 5.506 0 0 1-5.5-5.5v-3.474c0-3.033 2.468-5.5 5.5-5.5H93a.5.5 0 0 1 .5.5v13.474z"
+              />
+              <path
+                d="M83.449 54.522a4.347 4.347 0 0 0-4.343 4.342c0 2.395 1.948 4.342 4.343 4.342s4.342-1.948 4.342-4.342a4.347 4.347 0 0 0-4.342-4.342zm0 5.685c-.74 0-1.343-.602-1.343-1.342a1.343 1.343 0 0 1 2.685 0c0 .739-.602 1.342-1.342 1.342z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Leave Statistics -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <canvas id="piecharts" class="h-300"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center">
+          <div class="chartjs-wrapper-demo">
+            <canvas id="doughcharts" class="h-300"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table_header">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length">
+              <label class="col-form-label" for="">
+                Show
+                <select
+                  [(ngModel)]="pageSize"
+                  (ngModelChange)="changePageSize()"
+                  class="form-control form-control-sm"
+                >
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                Entries
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table
+          matSort
+          (matSortChange)="sortData($event)"
+          class="table table-striped custom-table mb-0 datatable"
+        >
+          <thead>
+            <tr>
+              <th mat-sort-header="leaveType">Leave Type</th>
+              <th mat-sort-header="from">From</th>
+              <th mat-sort-header="to">To</th>
+              <th mat-sort-header="noofDays">No of Days</th>
+              <th mat-sort-header="reason">Reason</th>
+              <th class="text-center">Status</th>
+              <th mat-sort-header="id">Approved by</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of lstLeave; track row; let i = $index) {
+            <tr>
+              <td>{{ row.leaveType }}</td>
+              <td>{{ row.from }}</td>
+              <td>{{ row.to }}</td>
+              <td>{{ row.noofDays }}</td>
+              <td>{{ row.reason }}</td>
+              <td class="text-center">
+                <div class="action-label">
+                  <a class="btn btn-white btn-sm btn-rounded">
+                    <i
+                      class="fa-regular fa-circle-dot me-1"
+                      [ngClass]="{
+                        'text-success': row.status === 'Approved',
+                        'text-danger': row.status === 'Declined',
+                        'text-purple': row.status === 'New'
+                      }"
+                    ></i
+                    >{{ row.status }}
+                  </a>
+                </div>
+              </td>
+              <td>
+                <h2 class="table-avatar">
+                  <a
+                    [routerLink]="routes.employeeProfile"
+                    class="avatar avatar-xs"
+                    ><img
+                      src="assets/img/profiles/avatar-{{ i + 1 }}.jpg"
+                      alt=""
+                  /></a>
+                  <a [routerLink]="routes.employeeProfile">Richard Miles</a>
+                </h2>
+              </td>
+              <td class="text-end">
+                <div class="dropdown dropdown-action">
+                  <a
+                    class="action-icon dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    ><i class="material-icons">more_vert</i></a
+                  >
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" (click)="editLeave()"
+                      ><i class="fa-solid fa-pencil m-r-5"></i> Edit</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      data-bs-toggle="modal"
+                      data-bs-target="#delete_approve"
+                      ><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            } @if (lstLeave.length === 0) {
+            <tr>
+              <td colspan="10">
+                <h5 style="text-align: center">No data found</h5>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="table_footer">
+        <div class="col-sm-12 col-md-5">
+          <div class="dataTables_info">
+            Showing {{ serialNumberArray[0] }} to
+            {{ serialNumberArray[serialNumberArray.length - 1] }} of
+            {{ totalData }} entries
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-7">
+          <div class="pagination_section">
+            <ul class="pagination">
+              <li
+                class="page-item"
+                [ngClass]="{
+                  disabled: currentPage === 1
+                }"
+              >
+                <a
+                  (click)="getMoreData('previous')"
+                  class="page-link"
+                  href="javascript:void(0);"
+                  tabindex="-1"
+                  ><i class="fa fa-angle-double-left"></i
+                ></a>
+              </li>
+
+              @for (item of pageNumberArray; track item; let i = $index) {
+              <li
+                class="page-item"
+                [class.active]="item === currentPage"
+                [ngClass]="
+                  (pageNumberArray[currentPage - 2] > item &&
+                    item !== 1 &&
+                    pageNumberArray.length > 6) ||
+                  (pageNumberArray[currentPage] < item &&
+                    item !== 1 &&
+                    pageNumberArray.length > 6 &&
+                    pageNumberArray.length !== item)
+                    ? 'hide-page-no'
+                    : 'show-page-no'
+                "
+              >
+                <a
+                  (click)="moveToPage(item)"
+                  class="page-link"
+                  href="javascript:void(0);"
+                >
+                  {{ item }}
+                </a>
+              </li>
+              @if ( i === 0 && pageNumberArray.length > 6 && currentPage > 2 ) {
+              <li
+                class="page-item"
+                [hidden]="currentPage === 1"
+                (click)="moveToPage(currentPage - 2)"
+                (keydown.enter)="moveToPage(currentPage - 2)"
+                tabindex="0"
+              >
+                <a class="page-link" href="javascript:void(0);"> ... </a>
+              </li>
+              } @if ( i === pageNumberArray.length - 2 && pageNumberArray.length
+              > 6 ) {
+              <li
+                [hidden]="
+                  currentPage >= pageNumberArray[pageNumberArray.length - 2] ||
+                  totalData < serialNumberArray[serialNumberArray.length - 1]
+                "
+                class="page-item"
+                (click)="moveToPage(currentPage + 2)"
+                (keydown.enter)="moveToPage(currentPage + 2)"
+                tabindex="0"
+              >
+                <a class="page-link" href="javascript:void(0);"> ... </a>
+              </li>
+              } }
+
+              <li
+                class="page-item"
+                [ngClass]="{
+                  disabled:
+                    currentPage ===
+                      pageNumberArray[pageNumberArray.length - 1] ||
+                    lstLeave.length === 0
+                }"
+              >
+                <a
+                  (click)="getMoreData('next')"
+                  class="page-link"
+                  href="javascript:void(0);"
+                  ><i class="fa fa-angle-double-right"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Delete Leave Modal -->
+<div class="modal custom-modal fade" id="delete_approve" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Leave</h3>
+          <p>Are you sure want to Cancel this leave?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" class="btn btn-primary continue-btn"
+                >Delete</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                data-bs-dismiss="modal"
+                class="btn btn-primary cancel-btn"
+                >Cancel</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Leave Modal -->

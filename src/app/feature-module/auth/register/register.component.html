@@ -1,0 +1,150 @@
+<div class="account-page">
+  <div class="main-wrapper">
+    <div class="account-content">
+      <div class="container">
+        <!-- Account Logo -->
+        <div class="account-logo">
+          <img src="assets/img/logos/image.png" alt="Dreams Technologies" />
+        </div>
+        <!-- /Account Logo -->
+
+        <div class="account-box">
+          <div class="account-wrapper">
+            <h3 class="account-title">Register</h3>
+            <p class="account-subtitle">Access to our dashboard</p>
+
+            <!-- Account Form -->
+            <form [formGroup]="registerForm">
+              <div class="input-block mb-4">
+                <label class="col-form-label"
+                  >Email<span class="mandatory">*</span></label
+                >
+                <input
+                  [ngClass]="{
+                    hasError:
+                      (isSubmitted && c['email'].invalid) ||
+                      (c['email'].invalid &&
+                        (c['email'].dirty || c['email'].touched))
+                  }"
+                  class="form-control"
+                  placeholder="Enter Email"
+                  type="email"
+                  formControlName="email"
+                />
+                @if((isSubmitted && c['email'].invalid) || (c['email'].invalid
+                && (c['email'].dirty || c['email'].touched))){
+                <div class="text-danger">
+                  @if(c['email'].hasError('required')){
+                  <small>{{ "email" | titlecase }} is required.</small>
+                  } @if(c['email'].hasError('email')){
+                  <small>Please enter valid email address.</small>
+                  }
+                </div>
+                }
+              </div>
+              <div class="input-block mb-4">
+                <label class="col-form-label"
+                  >Password<span class="mandatory">*</span></label
+                >
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{
+                      hasError:
+                        (isSubmitted && c['password'].invalid) ||
+                        (c['password'].invalid &&
+                          (c['password'].dirty || c['password'].touched))
+                    }"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    [type]="password[1] ? 'text' : 'password'"
+                    formControlName="password"
+                    id="password"
+                  />
+                  <span
+                    class="fa-solid"
+                    [ngClass]="password[1] ? 'fa-eye' : 'fa-eye-slash'"
+                    (click)="togglePassword(1)"
+                    id="toggle-password"
+                  ></span>
+                </div>
+                @if( (isSubmitted && c['password'].invalid) ||
+                (c['password'].invalid && (c['password'].dirty ||
+                c['password'].touched))){
+                <div class="text-danger">
+                  @if(c['password'].hasError('required')){
+                  <small>{{ "password" | titlecase }} is required.</small>
+                  } @if(c['password'].errors?.['invalidPassword']){
+                  <small>
+                    Password must include at least one lowercase letter, one
+                    uppercase letter, one number, and one special character, and
+                    be between 8 to 12 characters long.
+                  </small>
+                  }
+                </div>
+                }
+              </div>
+              <div class="input-block mb-4">
+                <label class="col-form-label"
+                  >Repeat Password<span class="mandatory">*</span></label
+                >
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{
+                      hasError:
+                        (isSubmitted && c['repeatPassword'].invalid) ||
+                        (c['repeatPassword'].invalid &&
+                          (c['repeatPassword'].dirty ||
+                            c['repeatPassword'].touched))
+                    }"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    [type]="password[2] ? 'text' : 'password'"
+                    formControlName="repeatPassword"
+                    id="repeatPassword"
+                  />
+                  <span
+                    class="fa-solid"
+                    [ngClass]="password[2] ? 'fa-eye' : 'fa-eye-slash'"
+                    (click)="togglePassword(2)"
+                    id="toggle-password"
+                  ></span>
+                </div>
+                @if((isSubmitted && c['repeatPassword'].invalid) ||
+                (c['repeatPassword'].invalid && (c['repeatPassword'].dirty ||
+                c['repeatPassword'].touched))){
+                <div class="text-danger">
+                  @if(c['repeatPassword'].hasError('required')){
+                  <small>{{ "password" | titlecase }} is required.</small>
+                  } @if(c['repeatPassword'].errors?.['invalidPassword']){
+                  <small>
+                    Password must include at least one lowercase letter, one
+                    uppercase letter, one number, and one special character, and
+                    be between 8 to 12 characters long.
+                  </small>
+                  }
+                </div>
+                }
+              </div>
+              <div class="input-block mb-4 text-center">
+                <button
+                  class="btn btn-primary account-btn"
+                  type="button"
+                  (click)="navigate()"
+                >
+                  Register
+                </button>
+              </div>
+              <div class="account-footer">
+                <p>
+                  Already have an account?
+                  <a [routerLink]="routes.login">Login</a>
+                </p>
+              </div>
+            </form>
+            <!-- /Account Form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

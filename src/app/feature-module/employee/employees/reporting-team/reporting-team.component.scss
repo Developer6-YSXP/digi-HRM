@@ -1,0 +1,147 @@
+/* General Styling for the Tree Structure */
+.tree {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  overflow: hidden;
+}
+
+.tree ul {
+  padding-top: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.list-overflow {
+  overflow: hidden;
+  overflow-x: auto;
+  padding: 0 0 25px;
+}
+
+/* Tree List Item Styling */
+.tree li {
+  float: left;
+  text-align: center;
+  width: max-content;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 15px 0 15px;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+/* Connectors Styling */
+.tree li::before,
+.tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 1px solid #d1d1d1;
+  width: 50%;
+  height: 20px;
+}
+
+.tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid #d1d1d1;
+}
+
+/* Hide connectors for single children */
+.tree li:only-child::after,
+.tree li:only-child::before {
+  display: none;
+}
+
+/* Adjust padding for single children */
+.tree li:only-child {
+  padding-top: 0;
+}
+
+/* Styling for the first and last children */
+.tree li:first-child::before {
+  border: 0 none;
+}
+
+.tree li:last-child::after {
+  border: 0 none;
+}
+
+.tree li:last-child::before {
+  border-right: 1px solid #d1d1d1;
+  border-radius: 0 10px 0 0;
+}
+
+.tree li:first-child::after {
+  border-radius: 10px 0 0 0;
+}
+
+/* Downward Connectors from Parents */
+.tree ul ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid #d1d1d1;
+  width: 0;
+  height: 20px;
+}
+
+/* Link Styling */
+.tree li a {
+  border: 1px solid #d1d1d1;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  max-width: max-content;
+  width: max-content;
+  box-sizing: border-box;
+}
+
+/* Profile Card Image */
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Profile Card Details */
+.profile-details {
+  text-align: left;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.profile-designation {
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Hover Effects */
+.tree li a:hover,
+.tree li a:hover + ul li a {
+  background-color: #e0f2f1;
+  color: #000;
+  border: 1px solid #b2dfdb;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Connector Styles on Hover */
+.tree li a:hover + ul li::after,
+.tree li a:hover + ul li::before,
+.tree li a:hover + ul::before,
+.tree li a:hover + ul ul::before {
+  border-color: #b2dfdb;
+}

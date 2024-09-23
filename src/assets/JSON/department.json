@@ -1,0 +1,71 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "departmentName": "Web Development",
+      "members": [
+        {
+          "id": 1,
+          "memberName": "ABC",
+          "departmentName": "Web Development"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "departmentName": "Application Development",
+      "members": [
+        {
+          "id": 1,
+          "memberName": "ABC",
+          "departmentName": "Application Development"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "departmentName": "IT Management",
+      "members": [
+        {
+          "id": 1,
+          "memberName": "ABC",
+          "departmentName": "IT Management"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "departmentName": "Accounts Development",
+      "members": [
+        {
+          "id": 1,
+          "memberName": "ABC",
+          "departmentName": "Accounts Development"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "departmentName": "Support Management",
+      "members": [
+        {
+          "id": 1,
+          "memberName": "ABC",
+          "departmentName": "Support Management"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "departmentName": "Marketing",
+      "members": [
+        {
+          "id": 1,
+          "memberName": "ABC",
+          "departmentName": "Marketing"
+        }
+      ]
+    }
+  ],
+  "totalData": 6
+}

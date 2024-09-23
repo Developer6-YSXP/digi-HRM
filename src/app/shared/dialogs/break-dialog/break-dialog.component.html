@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+    <h1 mat-dialog-title class="modal-header">Break</h1>
+  </div>
+  <button type="button" class="btn-close me-3" (click)="close()"></button>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <form>
+    <div class="col-md-12">
+      <h6>Select Break Type</h6>
+      <mat-radio-group
+        aria-label="Select break type"
+        (change)="otherFiled($event.value)"
+        color="primary"
+      >
+        <mat-radio-button [value]="1">Tea Break</mat-radio-button>
+        <mat-radio-button [value]="2">Smoke Break</mat-radio-button>
+        <mat-radio-button [value]="3">Lunch Break</mat-radio-button>
+        <mat-radio-button [value]="4">Other Break</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    @if(otherReason){
+    <div class="input-block mb-0 mt-3">
+      <input
+        class="form-control status"
+        type="text"
+        placeholder="Enter Reason"
+      />
+    </div>
+    }
+
+    <div class="submit-section d-flex justify-content-end">
+      <button class="btn btn-primary cancel-btn me-3" (click)="close()">
+        {{ data.closeBtn }}
+      </button>
+      <button class="btn btn-primary submit-btn" (click)="onSubmit()">
+        {{ data.submitBtn }}
+      </button>
+    </div>
+  </form>
+</div>

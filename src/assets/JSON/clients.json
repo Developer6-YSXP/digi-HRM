@@ -1,0 +1,20 @@
+{
+    "data" : [
+        {
+          "name": "Barry Cuda",
+          "role": "CEO",
+          "img" : "assets/img/logos/image.png",
+          "company": "YellowStone Xperiences",
+          "image": "avatar-06",
+          "clientId": "CLT-0001",
+          "email": "barrycuda@example.com",
+          "phone": "9876543210",
+          "status": "Active",
+          "status2": "Inactive",
+          "id": 1
+        }  
+        
+    
+      ],
+      "totalData":1
+}

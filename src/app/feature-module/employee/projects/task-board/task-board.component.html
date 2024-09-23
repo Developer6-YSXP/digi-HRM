@@ -1,0 +1,1077 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h3 class="page-title">{{ projectName }}</h3>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="add-task-btn-wrapper me-3">
+          <span
+            class="add-task-btn btn add-btn btn-white btn-sm"
+            tabindex="0"
+            (click)="openTaskDialog()"
+          >
+            <i class="fas fa-tasks"></i> Add Task
+          </span>
+        </div>
+        <div class="input-block mb-0">
+          <i class="fas fa-search"></i>
+          <input class="form-control" type="search" placeholder="Search Task" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <section class="task-board">
+    <div class="page-options mb-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="content-list">
+          <ul class="inline-list">
+            <li
+              *ngFor="let option of options"
+              [ngClass]="{ active: option === selectedOption }"
+              (click)="selectOption(option)"
+            >
+              <i [ngClass]="option.icon"></i> {{ option.label }}
+            </li>
+          </ul>
+        </div>
+        <div class="add-task-btn-wrapper me-3">
+          <span class="add-task-btn btn btn-white btn-sm" tabindex="0">
+            <i class="fas fa-share"></i> Share
+          </span>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div
+      class="d-flex h-100 board-overflow"
+      *ngIf="selectedOption.link === '#board'"
+    >
+      <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+        <main class="board-section" formArrayName="groups">
+          <div class="board-list" cdkDropListGroup>
+            <!-- Loop through existing groups -->
+            <div
+              *ngFor="let group of groups.controls; let i = index"
+              [formGroupName]="i"
+              [ngStyle]="{
+                'background-color': group.get('background')?.value || '#f3f3f5'
+              }"
+              class="board"
+              cdkDropList
+              [cdkDropListData]="getTasks(i).controls"
+              (cdkDropListDropped)="dropTask($event, i)"
+            >
+              <!-- Group header content here -->
+              <div class="d-flex justify-content-between">
+                <div class="board-header d-flex align-items-center">
+                  <p
+                    class="d-flex align-items-center gap-1 text-sm"
+                    [ngStyle]="{
+                      'background-color': group.get('color')?.value || '#A2A4A7'
+                    }"
+                  >
+                    <!-- Your SVG and Group Name -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      fill="#fff"
+                      height="20"
+                      width="20"
+                    >
+                      <path
+                        d="M256 512C114.625 512 0 397.375 0 256S114.625 0 256 0s256 114.625 256 256-114.625 256-256 256zm0-448C149.969 64 64 149.969 64 256s85.969 192 192 192c106.03 0 192-85.969 192-192S362.031 64 256 64zm0 320c-70.688 0-128-57.312-128-128s57.312-128 128-128 128 57.312 128 128-57.312 128-128 128z"
+                      />
+                    </svg>
+                    <span class="text-white">
+                      {{ group.get("statusName")?.value || "TO DO" }}
+                    </span>
+                  </p>
+                  <span class="count">{{ getTasks(i).length }}</span>
+                </div>
+                <div class="d-flex align-items-center gap-2 action-options">
+                  <!-- Group actions -->
+                  <div class="action">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </div>
+                  <div class="add-task" (click)="addTask(i)">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                  <div class="remove-group" (click)="removeGroup(i)">
+                    <i class="fas fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Task list with drag functionality -->
+              <div formArrayName="tasks">
+                <div
+                  *ngFor="let task of getTasks(i).controls; let j = index"
+                  [formGroupName]="j"
+                  class="board-body"
+                  cdkDrag
+                  (mouseover)="isHovered[i] = j"
+                  (mouseleave)="isHovered[i] = null"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h6 class="my-2 heading">
+                      <input
+                        type="text"
+                        class="taskField"
+                        placeholder="Enter Task Name"
+                      />
+                    </h6>
+                    <div
+                      *ngIf="isHovered[i] === j"
+                      class="d-flex align-items-center gap-3 task-options"
+                    >
+                      <!-- Task actions -->
+
+                      <i
+                        class="fas fa-eye"
+                        matTooltip="View Task"
+                        (click)="viewTaskSummary()"
+                      ></i>
+                      <i
+                        class="fas fa-trash"
+                        matTooltip="Delete"
+                        (click)="removeTask(i, j)"
+                      ></i>
+                    </div>
+                  </div>
+
+                  <!-- Other task info (status, assignee, etc.) -->
+                  <span class="project-name">{{
+                    projectName || "Project Name"
+                  }}</span>
+                  <ul class="item-list">
+                    <li class="list-content">
+                      <p class="d-flex gap-1 text-sm m-0">
+                        <!-- Task status icon -->
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                          [attr.fill]="group.get('color')?.value || '#A2A4A7'"
+                          height="14"
+                          width="14"
+                        >
+                          <path
+                            d="M256 512C114.625 512 0 397.375 0 256S114.625 0 256 0s256 114.625 256 256-114.625 256-256 256zm0-448C149.969 64 64 149.969 64 256s85.969 192 192 192c106.03 0 192-85.969 192-192S362.031 64 256 64zm0 320c-70.688 0-128-57.312-128-128s57.312-128 128-128 128 57.312 128 128-57.312 128-128 128z"
+                          />
+                        </svg>
+                        <span
+                          class="status-title"
+                          [ngStyle]="{
+                            color: group.get('color')?.value || '#A2A4A7'
+                          }"
+                          >{{ group.get("statusName")?.value || "To Do" }}</span
+                        >
+                      </p>
+                    </li>
+                    <!-- Other task details -->
+                    <li class="list-content">
+                      <i class="fas fa-user me-2"></i>
+                      <span>
+                        <mat-select
+                          formControlName="followers"
+                          class="taskField"
+                        >
+                          <mat-option value="0">Select Assignee</mat-option>
+                          <mat-option value="1">
+                            <!-- <div class="avatar">
+                              <span class="m-auto">{{
+                                getInitials("Bhupender Singh")
+                              }}</span>
+                            </div> -->
+                            Bhupender Singh</mat-option
+                          >
+                          <mat-option value="2">
+                            <!-- <div class="avatar">
+                              <span class="m-auto">{{
+                                getInitials("Anuj Pal")
+                              }}</span>
+                            </div> -->
+                            Anuj Pal</mat-option
+                          >
+                          <mat-option value="3">
+                            <!-- <div class="avatar">
+                              <span class="m-auto">{{
+                                getInitials("Praveen")
+                              }}</span>
+                            </div> -->
+                            Praveen</mat-option
+                          >
+                        </mat-select>
+                      </span>
+                    </li>
+                    <li class="list-content">
+                      <i class="far fa-calendar me-2"></i>
+                      <input
+                        class="taskField datetimepicker"
+                        bsDatepicker
+                        type="text"
+                        placeholder="Select Date"
+                      />
+                    </li>
+                    <li class="list-content">
+                      <i class="fas fa-flag me-2"></i>
+                      <span>
+                        <mat-select formControlName="taskPriority">
+                          <mat-option value="0">Select Priority</mat-option>
+                          <mat-option value="1">
+                            <span style="color: red"
+                              ><i class="fas fa-flag" style="color: red"></i>
+                              High</span
+                            >
+                          </mat-option>
+                          <mat-option value="2">
+                            <span style="color: blue"
+                              ><i class="fas fa-flag" style="color: blue"></i>
+                              Medium</span
+                            >
+                          </mat-option>
+                          <mat-option value="3">
+                            <span style="color: green"
+                              ><i class="fas fa-flag" style="color: green"></i>
+                              Low</span
+                            >
+                          </mat-option>
+                        </mat-select>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Button to add a new task -->
+              <div class="text-center mb-3">
+                <button
+                  class="add-task-btn btn btn-white btn-sm"
+                  (click)="addTask(i)"
+                >
+                  <i class="fas fa-plus"></i> Add Task
+                </button>
+              </div>
+            </div>
+            <!-- Section for adding a new group -->
+          </div>
+        </main>
+      </form>
+      <div class="text-center">
+        <div class="new-group" (click)="toggleShowGroup()">
+          <i class="fas fa-plus"></i> Add Group
+        </div>
+        <div class="group-div" *ngIf="showGroup">
+          <div class="input-block mb-0">
+            <input
+              class="form-control status"
+              type="text"
+              placeholder="Status name"
+              [(ngModel)]="statusName"
+            />
+          </div>
+          <div class="mt-3 d-flex color-picker">
+            <p class="m-0">Pick Color</p>
+            <ngx-colors
+              [(ngModel)]="color"
+              ngx-colors-trigger
+              style="display: inline-block; margin: 5px"
+            ></ngx-colors>
+            <button class="btn add-btn btn-sm" (click)="generateGroup()">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedOption.link === '#list'">
+      <div class="list-section">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-body">
+              <div
+                class="accordions-items-seperate"
+                id="accordionSpacingExample"
+              >
+                <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+                  <main formArrayName="groups">
+                    <div
+                      class="my-3"
+                      *ngFor="let group of groups.controls; let i = index"
+                      [formGroupName]="i"
+                    >
+                      <div class="accordion-item">
+                        <h2
+                          class="accordion-header d-flex"
+                          [id]="'headingSpacing' + i"
+                        >
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            [attr.data-bs-toggle]="'collapse'"
+                            [attr.data-bs-target]="'#Spacing' + i"
+                            aria-expanded="false"
+                            [attr.aria-controls]="'Spacing' + i"
+                          >
+                            {{ group.get("statusName")?.value || "TO DO" }}
+                          </button>
+                        </h2>
+                        <div
+                          [id]="'Spacing' + i"
+                          class="accordion-collapse collapse"
+                          [attr.aria-labelledby]="'headingSpacing' + i"
+                          data-bs-parent="#accordionSpacingExample"
+                        >
+                          <div class="accordion-body">
+                            <!-- Scrollable Task Table -->
+                            <div class="table-responsive">
+                              <table class="task-table table">
+                                <thead>
+                                  <tr>
+                                    <th>Task Name</th>
+                                    <th>Status</th>
+                                    <th>Assignee</th>
+                                    <th>Date</th>
+                                    <th>Priority</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody formArrayName="tasks">
+                                  <tr
+                                    *ngFor="
+                                      let task of getTasks(i).controls;
+                                      let j = index
+                                    "
+                                    [formGroupName]="j"
+                                  >
+                                    <td>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter Task Name"
+                                        formControlName="taskName"
+                                        class="taskInput"
+                                      />
+                                    </td>
+                                    <td>
+                                      <p class="d-flex gap-1 text-sm m-0">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 512 512"
+                                          [attr.fill]="
+                                            group.get('color')?.value ||
+                                            '#A2A4A7'
+                                          "
+                                          height="14"
+                                          width="14"
+                                        >
+                                          <path
+                                            d="M256 512C114.625 512 0 397.375 0 256S114.625 0 256 0s256 114.625 256 256-114.625 256-256 256zm0-448C149.969 64 64 149.969 64 256s85.969 192 192 192c106.03 0 192-85.969 192-192S362.031 64 256 64zm0 320c-70.688 0-128-57.312-128-128s57.312-128 128-128 128 57.312 128 128-57.312 128-128 128z"
+                                          />
+                                        </svg>
+                                        <span
+                                          class="status-title"
+                                          [ngStyle]="{
+                                            color:
+                                              group.get('color')?.value ||
+                                              '#A2A4A7'
+                                          }"
+                                          >{{
+                                            group.get("statusName")?.value ||
+                                              "To Do"
+                                          }}</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td>
+                                      <mat-select formControlName="followers">
+                                        <mat-option value="0"
+                                          >Select Assignee</mat-option
+                                        >
+                                        <mat-option value="1"
+                                          >Bhupender Singh</mat-option
+                                        >
+                                        <mat-option value="2"
+                                          >Anuj Pal</mat-option
+                                        >
+                                        <mat-option value="3"
+                                          >Praveen</mat-option
+                                        >
+                                      </mat-select>
+                                    </td>
+                                    <td>
+                                      <input
+                                        class="datetimepicker"
+                                        bsDatepicker
+                                        type="text"
+                                        placeholder="Select Date"
+                                        formControlName="dueDate"
+                                      />
+                                    </td>
+                                    <td>
+                                      <mat-select
+                                        formControlName="taskPriority"
+                                      >
+                                        <mat-option value="0"
+                                          >Select Priority</mat-option
+                                        >
+                                        <mat-option value="1">
+                                          <span style="color: red">
+                                            <i
+                                              class="fas fa-flag"
+                                              style="color: red"
+                                            ></i>
+                                            High
+                                          </span>
+                                        </mat-option>
+                                        <mat-option value="2">
+                                          <span style="color: blue">
+                                            <i
+                                              class="fas fa-flag"
+                                              style="color: blue"
+                                            ></i>
+                                            Medium
+                                          </span>
+                                        </mat-option>
+                                        <mat-option value="3">
+                                          <span style="color: green">
+                                            <i
+                                              class="fas fa-flag"
+                                              style="color: green"
+                                            ></i>
+                                            Low
+                                          </span>
+                                        </mat-option>
+                                      </mat-select>
+                                    </td>
+                                    <td>
+                                      <div>
+                                        <i
+                                          class="fas fa-eye text-primary me-3"
+                                          matTooltip="View Task"
+                                          (click)="viewTaskSummary()"
+                                        ></i>
+                                        <i
+                                          class="fas fa-trash text-danger"
+                                          matTooltip="Delete"
+                                          (click)="removeTask(i, j)"
+                                        ></i>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <!-- Add Task Button -->
+                            <button
+                              type="button"
+                              class="btn add-task-btn btn-sm text-sm ms-3"
+                              (click)="addTask(i)"
+                            >
+                              <i class="fas fa-plus"></i> Add Task
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedOption.link === '#calendar'">
+      <div class="col-lg-12">
+        <div class="card mb-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <!-- Calendar -->
+                @if (calendarVisible) {
+                <full-calendar [options]="calendarOptions">
+                  <ng-template #eventContent let-arg>
+                    <b>{{ arg.timeText }}</b>
+                    <i>{{ arg.event.title }}</i>
+                  </ng-template>
+                </full-calendar>
+                }
+                <!-- /Calendar -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedOption.link === '#table'">hello</div>
+  </section>
+</div>
+<!-- /Page Content -->
+
+<div id="add_task_board" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Task Board</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Board Name</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="input-block mb-3 task-board-color">
+            <label class="col-form-label" for="">Task Board Color</label>
+            <div class="board-color-list">
+              <label class="board-control board-primary">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="primary"
+                  checked=""
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-success">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="success"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-info">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="info"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-purple">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="purple"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-warning">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="warning"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-danger">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="danger"
+                />
+                <span class="board-indicator"></span>
+              </label>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="edit_task_board" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Task Board</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Board Name</label>
+            <input type="text" class="form-control" value="Pending" />
+          </div>
+          <div class="input-block mb-3 task-board-color">
+            <label class="col-form-label" for="">Task Board Color</label>
+            <div class="board-color-list">
+              <label class="board-control board-primary">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="primary"
+                  checked=""
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-success">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="success"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-info">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="info"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-purple">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="purple"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-warning">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="warning"
+                />
+                <span class="board-indicator"></span>
+              </label>
+              <label class="board-control board-danger">
+                <input
+                  name="radio"
+                  type="radio"
+                  class="board-control-input"
+                  value="danger"
+                />
+                <span class="board-indicator"></span>
+              </label>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary btn-lg">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="new_project" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create New Project</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Project Name</label>
+            <input class="form-control" type="text" />
+          </div>
+          <div class="submit-section">
+            <button class="btn btn-primary submit-btn">Create Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Assign Leader Modal -->
+<div id="assign_leader" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign Leader to this project</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group m-b-30">
+          <input
+            placeholder="Search to add a leader"
+            class="form-control search-input"
+            type="text"
+          />
+          <button class="btn btn-primary">Search</button>
+        </div>
+        <div>
+          <ul class="chat-user-list">
+            <li>
+              <a>
+                <div class="media d-flex">
+                  <span class="avatar flex-shrink-0"
+                    ><img alt="" src="assets/img/profiles/avatar-3.jpg"
+                  /></span>
+                  <div
+                    class="media-body align-self-center text-nowrap flex-grow-1"
+                  >
+                    <div class="user-name">Richard Miles</div>
+                    <span class="designation">Web Developer</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a>
+                <div class="media d-flex">
+                  <span class="avatar flex-shrink-0"
+                    ><img alt="" src="assets/img/profiles/avatar-4.jpg"
+                  /></span>
+                  <div
+                    class="media-body align-self-center text-nowrap flex-grow-1"
+                  >
+                    <div class="user-name">John Smith</div>
+                    <span class="designation">Android Developer</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a>
+                <div class="media d-flex">
+                  <span class="avatar flex-shrink-0">
+                    <img alt="" src="assets/img/profiles/avatar-2.jpg" />
+                  </span>
+                  <div
+                    class="media-body align-self-center text-nowrap flex-grow-1"
+                  >
+                    <div class="user-name">Jeffery Lalor</div>
+                    <span class="designation">Team Leader</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="submit-section">
+          <button class="btn btn-primary submit-btn" type="button">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Assign Leader Modal -->
+
+<!-- Assign User Modal -->
+<div id="assign_user" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign the user to this project</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group m-b-30">
+          <input
+            placeholder="Search a user to assign"
+            class="form-control search-input"
+            type="text"
+          />
+          <button class="btn btn-primary">Search</button>
+        </div>
+        <div>
+          <ul class="chat-user-list">
+            <li>
+              <a>
+                <div class="media d-flex">
+                  <span class="avatar flex-shrink-0"
+                    ><img alt="" src="assets/img/profiles/avatar-4.jpg"
+                  /></span>
+                  <div
+                    class="media-body align-self-center text-nowrap flex-grow-1"
+                  >
+                    <div class="user-name">Richard Miles</div>
+                    <span class="designation">Web Developer</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a>
+                <div class="media d-flex">
+                  <span class="avatar flex-shrink-0"
+                    ><img alt="" src="assets/img/profiles/avatar-7.jpg"
+                  /></span>
+                  <div
+                    class="media-body align-self-center text-nowrap flex-grow-1"
+                  >
+                    <div class="user-name">John Smith</div>
+                    <span class="designation">Android Developer</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a>
+                <div class="media d-flex">
+                  <span class="avatar flex-shrink-0">
+                    <img alt="" src="assets/img/profiles/avatar-9.jpg" />
+                  </span>
+                  <div
+                    class="media-body align-self-center text-nowrap flex-grow-1"
+                  >
+                    <div class="user-name">Jeffery Lalor</div>
+                    <span class="designation">Team Leader</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="submit-section">
+          <button class="btn btn-primary submit-btn" type="button">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Assign User Modal -->
+
+<!-- Add Task Modal -->
+<div id="add_task_modal" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Task</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Name</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Priority</label>
+            <mat-select class="form-control" placeholder="Select">
+              <mat-option value="select">Select</mat-option>
+              <mat-option value="high">High</mat-option>
+              <mat-option value="normal">Normal</mat-option>
+              <mat-option value="low">Low</mat-option>
+            </mat-select>
+          </div>
+          <div class="input-block mb-3 date-input1">
+            <label class="col-form-label" for="">Due Date</label>
+            <div class="cal-icon">
+              <input
+                class="form-control datetimepicker"
+                type="text"
+                bsDatepicker
+                container=".date-input1"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Followers</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search to add"
+            />
+            <div class="task-follower-list">
+              <span
+                data-bs-toggle="tooltip"
+                data-placement="top"
+                title="John Doe"
+              >
+                <img
+                  src="assets/img/profiles/avatar-8.jpg"
+                  class="avatar"
+                  alt="John Doe"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span data-bs-toggle="tooltip" title="Richard Miles">
+                <img
+                  src="assets/img/profiles/avatar-6.jpg"
+                  class="avatar"
+                  alt="Richard Miles"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span data-bs-toggle="tooltip" title="John Smith">
+                <img
+                  src="assets/img/profiles/avatar-7.jpg"
+                  class="avatar"
+                  alt="John Smith"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span data-bs-toggle="tooltip" title="Mike Litorus">
+                <img
+                  src="assets/img/profiles/avatar-4.jpg"
+                  class="avatar"
+                  alt="Mike Litorus"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+            </div>
+          </div>
+          <div class="submit-section text-center">
+            <button class="btn btn-primary submit-btn" type="button">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Task Modal -->
+
+<!-- Edit Task Modal -->
+<div id="edit_task_modal" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Task</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Name</label>
+            <input type="text" class="form-control" value="Website Redesign" />
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Priority</label>
+            <select class="form-select form-control">
+              <option>Select</option>
+              <option selected>High</option>
+              <option>Normal</option>
+              <option>Low</option>
+            </select>
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Due Date</label>
+            <div class="cal-icon">
+              <input
+                class="form-control datetimepicker"
+                type="text"
+                value="20/08/2023"
+              />
+            </div>
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for="">Task Followers</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search to add"
+            />
+            <div class="task-follower-list">
+              <span data-bs-toggle="tooltip" title="John Doe">
+                <img
+                  src="assets/img/profiles/avatar-2.jpg"
+                  class="avatar"
+                  alt="John Doe"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span data-bs-toggle="tooltip" title="Richard Miles">
+                <img
+                  src="assets/img/profiles/avatar-9.jpg"
+                  class="avatar"
+                  alt="Richard Miles"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span data-bs-toggle="tooltip" title="John Smith">
+                <img
+                  src="assets/img/profiles/avatar-7.jpg"
+                  class="avatar"
+                  alt="John Smith"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span data-bs-toggle="tooltip" title="Mike Litorus">
+                <img
+                  src="assets/img/profiles/avatar-5.jpg"
+                  class="avatar"
+                  alt="Mike Litorus"
+                  width="20"
+                  height="20"
+                />
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+            </div>
+          </div>
+          <div class="submit-section text-center">
+            <button class="btn btn-primary submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Task Modal -->
