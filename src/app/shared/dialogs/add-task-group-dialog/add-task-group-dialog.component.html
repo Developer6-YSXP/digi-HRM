@@ -1,0 +1,524 @@
+<section class="task-section">
+  <div class="container">
+    <div class="row">
+      <div
+        [ngClass]="openActivities ? 'col-md-9 scrollable-content' : 'col-md-12'"
+      >
+        <div class="row">
+          <div
+            class="col-md-12 d-flex align-items-center justify-content-between"
+          >
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a>Projects</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a [routerLink]="routes.taskboard"> Tasks</a>
+              </li>
+              <li class="breadcrumb-item">Task-description</li>
+            </ul>
+            <div class="d-flex align-items-center">
+              <i
+                class="far fa-comment icon"
+                matTooltip="Activities"
+                (click)="openActivites()"
+              ></i>
+              <div (click)="close()" class="mx-3">
+                <i class="fas fa-times icon" matTooltip="Close Window"></i>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <div class="row task-heading">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+              <h2>Task Name</h2>
+              <div class="d-flex">
+                <div class="add-task-btn-wrapper me-3">
+                  <span class="add-task-btn btn btn-white btn-sm" tabindex="0">
+                    <i class="fas fa-plus"></i> Create Task
+                  </span>
+                </div>
+                <div class="add-task-btn-wrapper me-3">
+                  <span
+                    class="add-task-btn btn btn-white btn-sm"
+                    tabindex="0"
+                    (click)="shareAndInvite()"
+                  >
+                    <i class="fas fa-share"></i> Share
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <ul class="task-list">
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="far fa-dot-circle"></i>
+                  <span class="mx-1"> Status </span>
+                </div>
+                <div>
+                  <input
+                    matInput
+                    #statusInput
+                    [formControl]="statusCtrl"
+                    placeholder="Select Status"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    (optionSelected)="selected($event)"
+                  >
+                    <mat-option
+                      *ngFor="let status of filteredStatus | async"
+                      [value]="status"
+                    >
+                      {{ status }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </li>
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="fas fa-calendar"></i>
+                  <span class="mx-1">Dates</span>
+                </div>
+                <div>
+                  <input
+                    class="taskField datetimepicker"
+                    bsDaterangepicker
+                    type="text"
+                    placeholder="Select Date"
+                  />
+                </div>
+              </li>
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="fas fa-hourglass"></i>
+                  <span class="mx-1"> Time Estimate </span>
+                </div>
+                <div>
+                  <input type="text" placeholder="Type in time : 2h" />
+                </div>
+              </li>
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="fas fa-tags"></i> <span class="mx-1"> Tags </span>
+                </div>
+                <div>
+                  <input type="text" placeholder="Select tags" />
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 mt-3">
+            <ul class="task-list">
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="fas fa-user"></i>
+                  <span class="mx-1"> Assignees </span>
+                </div>
+                <div>
+                  <input type="text" placeholder="Select assignees" />
+                </div>
+              </li>
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="fas fa-flag"></i>
+                  <span class="mx-1"> Priority </span>
+                </div>
+                <div>
+                  <input type="text" placeholder="Mark priority" />
+                </div>
+              </li>
+              <li class="task-list-item">
+                <div class="list-item-label">
+                  <i class="fas fa-stopwatch"></i>
+                  <span class="mx-1"> Track Time </span>
+                </div>
+                <div>
+                  @if(!isRunning){
+                  <i class="fas fa-play-circle" (click)="startTimer()"></i>
+                  }@else {
+
+                  <i
+                    class="fas fa-pause-circle me-2"
+                    (click)="pauseTimer()"
+                  ></i>
+                  <i class="fas fa-stop-circle" (click)="stopTimer()"></i>
+                  }
+                  <input type="text" [value]="formattedTime" readonly />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row task-heading">
+          @if(!isDescription){
+          <div class="col-md-12 description-div">
+            <div class="description-label" (click)="openDescription()">
+              <i class="far fa-file me-2"></i> Add description
+            </div>
+          </div>
+          } @if(isDescription){
+          <div class="col-md-12 p-0 task-description">
+            <div class="card-body editors">
+              <p-editor
+                [style]="{ height: '320px' }"
+                [(ngModel)]="editorValue"
+              />
+            </div>
+          </div>
+          }
+        </div>
+        <div class="row task-heading">
+          <h2>Subtasks</h2>
+          @if(!showSubTask){
+          <div class="add-task-btn-wrapper me-3 mt-3">
+            <span
+              class="add-task-btn btn btn-white btn-sm"
+              tabindex="0"
+              (click)="toggleSubTask()"
+            >
+              <i class="fas fa-plus"></i> Add Task
+            </span>
+          </div>
+          } @if(showSubTask){
+          <div class="subTask-table mt-3" [formGroup]="taskForm">
+            <table class="table table-responsive table-bordered mb-3">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Assignee</th>
+                  <th>Due Date</th>
+                  <th>Priority</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="tasks">
+                <tr
+                  *ngFor="let task of tasks.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <td>
+                    <input
+                      formControlName="name"
+                      class="form-control"
+                      placeholder="Enter task name"
+                    />
+                  </td>
+                  <td>
+                    <mat-select formControlName="assignee">
+                      <mat-option value="0">Select Assignee</mat-option>
+                      <mat-option value="1">
+                        <!-- <div class="avatar">
+                          <span class="m-auto">{{
+                            getInitials("Bhupender Singh")
+                          }}</span>
+                        </div> -->
+                        Bhupender Singh</mat-option
+                      >
+                      <mat-option value="2">
+                        <!-- <div class="avatar">
+                          <span class="m-auto">{{
+                            getInitials("Anuj Pal")
+                          }}</span>
+                        </div> -->
+                        Anuj Pal</mat-option
+                      >
+                      <mat-option value="3">
+                        <!-- <div class="avatar">
+                          <span class="m-auto">{{
+                            getInitials("Praveen")
+                          }}</span>
+                        </div> -->
+                        Praveen</mat-option
+                      >
+                    </mat-select>
+                  </td>
+                  <td>
+                    <input
+                      class="form-control"
+                      formControlName="dueDate"
+                      bsDatepicker
+                      type="text"
+                      placeholder="Select Date"
+                    />
+                  </td>
+                  <td>
+                    <mat-select formControlName="priority">
+                      <mat-option value="0">Select Priority</mat-option>
+                      <mat-option value="High">
+                        <span style="color: red"
+                          ><i class="fas fa-flag" style="color: red"></i>
+                          High</span
+                        >
+                      </mat-option>
+                      <mat-option value="Medium">
+                        <span style="color: blue"
+                          ><i class="fas fa-flag" style="color: blue"></i>
+                          Medium</span
+                        >
+                      </mat-option>
+                      <mat-option value="Low">
+                        <span style="color: green"
+                          ><i class="fas fa-flag" style="color: green"></i>
+                          Low</span
+                        >
+                      </mat-option>
+                    </mat-select>
+                  </td>
+                  <td class="actions-task">
+                    <i class="fas fa-edit me-3" matTooltip="Rename"></i>
+                    <i
+                      class="fas fa-trash text-danger"
+                      matTooltip="Remove"
+                      (click)="removeTask(i)"
+                    ></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              (click)="addSubTask()"
+              class="add-task-btn btn btn-white btn-sm"
+            >
+              <i class="fas fa-plus"></i> Add Subtask
+            </button>
+          </div>
+          }
+        </div>
+        <div class="row task-heading">
+          <div class="col-md-12">
+            <h2>Assigned Comments</h2>
+            <p>All assigned comments will show here</p>
+          </div>
+        </div>
+        <div class="row task-heading">
+          <div class="col-md-12">
+            <h2>Attachments</h2>
+            <div class="custom-file-container" data-upload-id="mySecondImage">
+              <label
+                >Upload (Allow Multiple)
+                <a
+                  href="javascript:void(0)"
+                  class="custom-file-container__image-clear"
+                  title="Clear Image"
+                ></a
+              ></label>
+              <ngx-dropzone
+                (change)="onMultipleSelect($event)"
+                class="service-upload"
+                [accept]="'image/jpeg, image/png, image/jpg, application/pdf'"
+              >
+                @if(multipleFiles.length === 0){
+                <ngx-dropzone-label
+                  class="drop-browse align-center"
+                  [ngStyle]="{
+                    'pointer-events': isfile ? 'none' : 'all'
+                  }"
+                >
+                  <span
+                    ><img src="assets/img/icons/drop-icon.svg" alt="upload"
+                  /></span>
+                  <div class="d-flex">
+                    Drop your files here or<span class="text-primary ms-1"
+                      >browse</span
+                    >
+                  </div>
+                  <span class="text-muted">Maximum size: 50MB</span>
+                </ngx-dropzone-label>
+                } @for (f of multipleFiles; track f; let i = $index) {
+                @if(isImageFile(f)){
+                <div class="preview-img">
+                  <img [src]="fileSrc[i]" alt="" />
+                  <div class="d-flex align-items-center">
+                    <span [matTooltip]="f.name">{{ f.name }}</span>
+                    <i
+                      class="fas fa-trash text-danger"
+                      matTooltip="Delete"
+                      (click)="onRemoveMultiple(f, $event)"
+                    ></i>
+                  </div>
+                </div>
+                }@else {
+                <div class="preview-img">
+                  <img
+                    src="../../../../assets/img/dummy-file.png"
+                    class="docImg"
+                    alt=""
+                  />
+                  <div class="d-flex align-items-center">
+                    <span [matTooltip]="f.name">{{ f.name }}</span>
+
+                    <div class="d-flex gap-3">
+                      <i
+                        class="fas fa-eye text-dark"
+                        matTooltip="Preview"
+                        (click)="previewDoc(fileSrc[i], f, $event)"
+                      ></i>
+                      <i
+                        class="fas fa-trash text-danger"
+                        matTooltip="Delete"
+                        (click)="onRemoveMultiple(f, $event)"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+
+                } }
+              </ngx-dropzone>
+            </div>
+          </div>
+        </div>
+      </div>
+      @if(openActivities){
+      <div class="col-md-3">
+        <div class="row">
+          <div
+            class="col-md-12 d-flex align-items-center justify-content-between"
+          >
+            <div class="breadcrumb">
+              <p class="breadcrumb-item">Activity</p>
+            </div>
+            <i
+              class="fas fa-times icon"
+              matTooltip="Close Activity"
+              (click)="openActivities = false"
+            ></i>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <div class="row">
+          <div class="col-md-12 activity-body">
+            <ul class="tasks-list">
+              <li>mention task <span>Time and Date</span></li>
+              <li>mention task <span>Time and Date</span></li>
+            </ul>
+          </div>
+          <div class="chat-footer">
+            <div class="message-bar">
+              <div class="message-inner">
+                <a
+                  href="javascript:void(0);"
+                  data-bs-toggle="modal"
+                  data-bs-target="#drag_files"
+                  class="link attach-icon"
+                  ><img src="assets/img/attachment.png" alt="Attachment Icon"
+                /></a>
+                <div class="message-area">
+                  <div class="input-group">
+                    <textarea
+                      placeholder="Write a comment..."
+                      class="form-control"
+                    ></textarea
+                    ><button type="button" class="btn btn-custom">
+                      <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Dragfiles Modal -->
+<div id="drag_files" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Drag and drop files upload</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="js-upload-form">
+          <div class="upload-drop-zone" id="drop-zone">
+            <i class="fa fa-cloud-upload fa-2x"></i>
+            <span class="upload-text">Just drag and drop files here</span>
+          </div>
+          <h4>Uploading</h4>
+          <ul class="upload-list">
+            <li class="file-list">
+              <div class="upload-wrap">
+                <div class="file-name">
+                  <i class="fa fa-photo"></i>
+                  photo.png
+                </div>
+                <div class="file-size">1.07 gb</div>
+                <button type="button" class="file-close">
+                  <i class="fa fa-close"></i>
+                </button>
+              </div>
+              <div class="progress progress-xs progress-striped">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 65%"
+                ></div>
+              </div>
+              <div class="upload-process">37% done</div>
+            </li>
+            <li class="file-list">
+              <div class="upload-wrap">
+                <div class="file-name">
+                  <i class="fa fa-file"></i>
+                  task.doc
+                </div>
+                <div class="file-size">5.8 kb</div>
+                <button type="button" class="file-close">
+                  <i class="fa fa-close"></i>
+                </button>
+              </div>
+              <div class="progress progress-xs progress-striped">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 65%"
+                ></div>
+              </div>
+              <div class="upload-process">37% done</div>
+            </li>
+            <li class="file-list">
+              <div class="upload-wrap">
+                <div class="file-name">
+                  <i class="fa fa-photo"></i>
+                  dashboard.png
+                </div>
+                <div class="file-size">2.1 mb</div>
+                <button type="button" class="file-close">
+                  <i class="fa fa-close"></i>
+                </button>
+              </div>
+              <div class="progress progress-xs progress-striped">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 65%"
+                ></div>
+              </div>
+              <div class="upload-process">Completed</div>
+            </li>
+          </ul>
+        </form>
+        <div class="submit-section">
+          <button class="btn btn-primary submit-btn">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Dragfiles Modal -->

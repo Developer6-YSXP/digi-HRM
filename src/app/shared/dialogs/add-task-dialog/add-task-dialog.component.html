@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+    <h1 mat-dialog-title class="modal-header">{{ data.title }}</h1>
+  </div>
+  <button type="button" class="btn-close me-3" (click)="close()"></button>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <h6>Hospital Admin</h6>
+  <div class="input-block mt-3">
+    <input
+      type="text"
+      placeholder="Enter Task Name"
+      formControlName="taskName"
+      class="form-control"
+    />
+  </div>
+
+  <div class="col-md-12 description-div">
+    <div class="description-label" (click)="openDescription()">
+      <i class="far fa-file me-2"></i> Add description
+    </div>
+  </div>
+  @if(isDescription){
+  <div class="col-md-12 p-0 mt-3 task-description">
+    <div class="card-body editors">
+      <p-editor [style]="{ height: '320px' }" [(ngModel)]="editorValue" />
+    </div>
+  </div>
+  }
+</div>
+<mat-divider></mat-divider>
+<div class="m-3 d-flex justify-content-end gap-3 align-items-center">
+  <i class="fas fa-paperclip" matTooltip="Attachments"></i>
+  <button class="btn add-btn btn-sm text-sm">
+    <i class="fas fa-plus"></i> Create Task
+  </button>
+</div>

@@ -1,0 +1,34 @@
+.content {
+  padding: 30px;
+}
+
+.clock-in-btn {
+  display: flex;
+  // flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.clock-in-list .nav {
+  border: none;
+  margin: 0;
+  li {
+    margin: 0;
+    margin-right: 10px;
+  }
+}
+
+.time-tracker {
+  position: fixed;
+  z-index: 99;
+  width: -webkit-fill-available;
+}
+
+.content {
+  margin-top: 70px;
+}
+
+.userImg {
+  height: 50px;
+  border-radius: 50%;
+}

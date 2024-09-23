@@ -1,0 +1,779 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Leaves</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="routes.adminDashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Leaves</li>
+        </ul>
+      </div>
+      <div class="col-auto float-end ms-auto">
+        <a
+          class="btn add-btn"
+          data-bs-toggle="modal"
+          data-bs-target="#add_leave"
+          ><i class="la la-plus-circle"></i> Add Leave</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Leave Statistics -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+            <h3 class="m-b-20 text-white">Today Presents</h3>
+            <h3 class="text-right text-white">12 / 5</h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              enable-background="new 0 0 28 28"
+              viewBox="0 0 28 28"
+            >
+              <switch>
+                <g>
+                  <path
+                    fill="#fff"
+                    d="M20,26H8c-2.8,0-5-2.2-5-5V10c0-2.8,2.2-5,5-5V3c0-0.6,0.4-1,1-1s1,0.4,1,1v2h9V3c0-0.6,0.4-1,1-1s1,0.4,1,1    v2.1c2.3,0.5,4,2.5,4,4.9v11C25,23.8,22.8,26,20,26z M5,13v8c0,1.7,1.3,3,3,3h12c1.7,0,3-1.3,3-3v-8H5z M5,11h18v-1    c0-1.7-1.3-3-3-3H8c-1.7,0-3,1.3-3,3V11z M8,17c-0.6,0-1-0.4-1-1s0.4-1,1-1h0c0.6,0,1,0.4,1,1S8.6,17,8,17z"
+                  />
+                </g>
+              </switch>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-green order-card">
+          <div class="card-block">
+            <h3 class="m-b-20 text-white">Planned Leaves</h3>
+            <h3 class="text-right text-white">8 <span>Today</span></h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              data-name="Layer 1"
+              viewBox="0 0 512 512"
+            >
+              <g data-name=" Group ">
+                <path
+                  d="M311.377,38H71.838A50.02,50.02,0,0,0,22,88.118v265.75a9.926,9.926,0,0,0,2.743,6.965L131.492,470.906A9.968,9.968,0,0,0,138.627,474h172.75C338.947,474,361,451.452,361,423.882V88.118C361,60.548,338.947,38,311.377,38ZM129,439.223,55.481,364h63.146c5.514,0,10.373,4.354,10.373,9.868Zm212-15.341A29.814,29.814,0,0,1,311.49,454H149V373.868C149,357.326,135.169,344,118.627,344H42V88.118A30,30,0,0,1,71.838,58H311.377a29.815,29.815,0,0,1,29.624,30V423.882Z"
+                  data-name=" Compound Path "
+                />
+                <path
+                  d="M289.787,168H99.587a10,10,0,1,0,0,20h190.2a10,10,0,0,0,0-20Z"
+                  data-name=" Path "
+                />
+                <path
+                  d="M289.787,228H99.587a10,10,0,1,0,0,20h190.2a10,10,0,1,0,0-20Z"
+                  data-name=" Path 2"
+                />
+                <path
+                  d="M289.787,288H99.587a10,10,0,1,0,0,20h190.2a10,10,0,1,0,0-20Z"
+                  data-name=" Path 3"
+                />
+                <path
+                  d="M99.587,132H187.4a10,10,0,0,0,0-20H99.587a10,10,0,1,0,0,20Z"
+                  data-name=" Path 4"
+                />
+                <path
+                  d="M445.45,47.821A44.567,44.567,0,0,0,400.94,92.3l-.2,302a10,10,0,0,0,1.128,4.62l34.711,66.759a10,10,0,0,0,17.744,0l34.711-66.759a10,10,0,0,0,1.128-4.62l-.2-302A44.568,44.568,0,0,0,445.45,47.821ZM470,149H420.9l.006-10h49.085Zm.014,20,.141,215H420.747l.143-215ZM445.452,67.821a24.545,24.545,0,0,1,24.511,24.5L469.98,119H420.923l.017-26.682A24.545,24.545,0,0,1,445.452,67.821Zm0,371.261L427.211,404h36.48Z"
+                  data-name=" Compound Path 2"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-yellow order-card">
+          <div class="card-block">
+            <h3 class="m-b-20 text-white">Unplanned Leaves</h3>
+            <h3 class="text-right text-white">1 <span>Today</span></h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+              <rect
+                width="16"
+                height="16"
+                x="9"
+                y="55"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 17 63)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="32"
+                y="55"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 40 63)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="55"
+                y="55"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 63 63)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="9"
+                y="9"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 17 17)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="32"
+                y="9"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 40 17)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="32"
+                y="32"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 40 40)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="9"
+                y="32"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 17 40)"
+              />
+              <rect
+                width="16"
+                height="16"
+                x="55"
+                y="9"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                rx="4"
+                transform="rotate(-90 63 17)"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-pink order-card">
+          <div class="card-block">
+            <h3 class="m-b-20 text-white">Pending Requests</h3>
+            <h3 class="text-right text-white">12</h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              data-name="Layer 1"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18.5 16.663A8 8 0 118.429 4.851a8.449 8.449 0 011.839-.662 7.993 7.993 0 011.382-.184A1 1 0 0012.6 2.961a1.021 1.021 0 00-1.044-.954 10.075 10.075 0 00-1.729.23A10.429 10.429 0 007.262 3.2 10 10 0 1020.125 17.829 1 1 0 0018.5 16.663zM15.119 4.632a8.085 8.085 0 012.866 2.056 1 1 0 101.494-1.331A10.108 10.108 0 0015.9 2.79a1 1 0 00-.779 1.842zM21.763 9.834c-.046-.209-.1-.415-.158-.618a1 1 0 10-1.919.558c.045.161.087.322.125.492A8.08 8.08 0 0120 12.009a7.889 7.889 0 01-.2 1.78 1 1 0 00.749 1.2.98.98 0 00.226.026 1 1 0 00.974-.775 9.95 9.95 0 00.014-4.406z"
+              />
+              <path
+                d="M11,9v3a1,1,0,0,0,.684.948l3,1a1,1,0,0,0,.632-1.9L13,11.279V9a1,1,0,0,0-2,0Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Leave Statistics -->
+
+  <!-- Search Filter -->
+  <div class="row filter-row">
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+      <div class="input-block mb-3 form-focus inputs">
+        <mat-form-field class="example-full-width">
+          <mat-label>Employee Name</mat-label>
+          <input type="text" matInput class="form-control floating" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+      <div class="input-block mb-3 form-focus select-focus select">
+        <mat-select
+          class="select custom-mat-select floating-mat-select"
+          placeholder="--Select--"
+        >
+          <mat-option>--Select--</mat-option>
+          <mat-option value="Germany">Casual Leave</mat-option>
+          <mat-option value="USA">Medical Leave</mat-option>
+          <mat-option value="Canada">Loss of Pay</mat-option>
+        </mat-select>
+        <label class="focus-label">Leave Type</label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+      <div class="input-block mb-3 form-focus select-focus select">
+        <mat-select
+          class="select custom-mat-select floating-mat-select"
+          placeholder="--Select--"
+        >
+          <mat-option>--Select--</mat-option>
+          <mat-option value="Germany">Pending</mat-option>
+          <mat-option value="USA">Approved</mat-option>
+          <mat-option value="Canada">Rejected</mat-option>
+        </mat-select>
+        <label class="focus-label">Leave Status</label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+      <div class="input-block mb-3 form-focus inputs date-input1">
+        <mat-form-field class="example-full-width cal-icon">
+          <mat-label>From</mat-label>
+          <input
+            bsDatepicker
+            container=".date-input1"
+            type="text"
+            matInput
+            class="form-control floating datetimepicker"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+      <div class="input-block mb-3 form-focus inputs date-input2">
+        <mat-form-field class="example-full-width cal-icon">
+          <mat-label>To</mat-label>
+          <input
+            bsDatepicker
+            container=".date-input2"
+            type="text"
+            matInput
+            class="form-control floating datetimepicker"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+      <a class="btn btn-success w-100"> Search </a>
+    </div>
+  </div>
+  <!-- /Search Filter -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table_header">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length">
+              <label class="col-form-label" for="">
+                Show
+                <select
+                  [(ngModel)]="pageSize"
+                  (ngModelChange)="changePageSize()"
+                  class="form-control form-control-sm"
+                >
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                Entries
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table
+          matSort
+          (matSortChange)="sortData($event)"
+          id="datatable"
+          class="table table-striped custom-table mb-0 datatable"
+        >
+          <thead>
+            <tr>
+              <th mat-sort-header="employeeName">Employee</th>
+              <th mat-sort-header="leaveType">Leave Type</th>
+              <th mat-sort-header="from">From</th>
+              <th mat-sort-header="to">To</th>
+              <th mat-sort-header="noofDays">No of Days</th>
+              <th mat-sort-header="reason">Reason</th>
+              <th class="text-center">Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of lstLeave; track row; let i = $index) {
+            <tr>
+              <td>
+                <h2 class="table-avatar">
+                  <a [routerLink]="routes.employeeProfile" class="avatar"
+                    ><img
+                      alt=""
+                      src="assets/img/profiles/avatar-{{ i + 1 }}.jpg"
+                  /></a>
+                  <a [routerLink]="routes.employeeProfile"
+                    >{{ row.employeeName }}
+                    <span>{{ row.designation }}</span></a
+                  >
+                </h2>
+              </td>
+              <td>{{ row.leaveType }}</td>
+              <td>{{ row.from }}</td>
+              <td>{{ row.to }}</td>
+              <td>{{ row.noofDays }}</td>
+              <td>{{ row.reason }}</td>
+              <td class="text-center">
+                <div class="dropdown action-label">
+                  <a
+                    class="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i
+                      class="fa-regular fa-circle-dot me-1"
+                      [ngClass]="{
+                        'text-success': row.status === 'Approved',
+                        'text-danger': row.status === 'Declined',
+                        'text-purple': row.status === 'New'
+                      }"
+                    ></i
+                    >{{ row.status || statusValue }}
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void(0);"
+                      ><i class="fa-regular fa-circle-dot text-purple"></i>
+                      New</a
+                    >
+                    <a class="dropdown-item" href="javascript:void(0);"
+                      ><i class="fa-regular fa-circle-dot text-info"></i>
+                      Pending</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      href="javascript:void(0);"
+                      data-bs-toggle="modal"
+                      data-bs-target="#approve_leave"
+                      ><i class="fa-regular fa-circle-dot text-success"></i>
+                      Approved</a
+                    >
+                    <a class="dropdown-item" href="javascript:void(0);"
+                      ><i class="fa-regular fa-circle-dot text-danger"></i>
+                      Declined</a
+                    >
+                  </div>
+                </div>
+              </td>
+              <td class="text-end">
+                <div class="dropdown dropdown-action">
+                  <a
+                    class="action-icon dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    ><i class="material-icons">more_vert</i></a
+                  >
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a
+                      class="dropdown-item"
+                      data-bs-toggle="modal"
+                      data-bs-target="#edit_leave"
+                      ><i class="fa-solid fa-pencil m-r-5"></i> Edit</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      data-bs-toggle="modal"
+                      data-bs-target="#delete_approve"
+                      ><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            } @if (lstLeave.length === 0) {
+            <tr>
+              <td colspan="10">
+                <h5 style="text-align: center">No data found</h5>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="table_footer">
+        <div class="col-sm-12 col-md-5">
+          <div class="dataTables_info">
+            Showing {{ serialNumberArray[0] }} to
+            {{ serialNumberArray[serialNumberArray.length - 1] }} of
+            {{ totalData }} entries
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-7">
+          <div class="pagination_section">
+            <ul class="pagination">
+              <li
+                class="page-item"
+                [ngClass]="{
+                  disabled: currentPage === 1
+                }"
+              >
+                <a
+                  (click)="getMoreData('previous')"
+                  class="page-link"
+                  href="javascript:void(0);"
+                  tabindex="-1"
+                  ><i class="fa fa-angle-double-left"></i
+                ></a>
+              </li>
+
+              @for (item of pageNumberArray; track item; let i = $index) {
+              <li
+                class="page-item"
+                [class.active]="item === currentPage"
+                [ngClass]="
+                  (pageNumberArray[currentPage - 2] > item &&
+                    item !== 1 &&
+                    pageNumberArray.length > 6) ||
+                  (pageNumberArray[currentPage] < item &&
+                    item !== 1 &&
+                    pageNumberArray.length > 6 &&
+                    pageNumberArray.length !== item)
+                    ? 'hide-page-no'
+                    : 'show-page-no'
+                "
+              >
+                <a
+                  (click)="moveToPage(item)"
+                  class="page-link"
+                  href="javascript:void(0);"
+                >
+                  {{ item }}
+                </a>
+              </li>
+              @if ( i === 0 && pageNumberArray.length > 6 && currentPage > 2 ) {
+              <li
+                class="page-item"
+                [hidden]="currentPage === 1"
+                (click)="moveToPage(currentPage - 2)"
+                (keydown.enter)="moveToPage(currentPage - 2)"
+                tabindex="0"
+              >
+                <a class="page-link" href="javascript:void(0);"> ... </a>
+              </li>
+              } @if ( i === pageNumberArray.length - 2 && pageNumberArray.length
+              > 6 ) {
+              <li
+                [hidden]="
+                  currentPage >= pageNumberArray[pageNumberArray.length - 2] ||
+                  totalData < serialNumberArray[serialNumberArray.length - 1]
+                "
+                class="page-item"
+                (click)="moveToPage(currentPage + 2)"
+                (keydown.enter)="moveToPage(currentPage + 2)"
+                tabindex="0"
+              >
+                <a class="page-link" href="javascript:void(0);"> ... </a>
+              </li>
+              } }
+
+              <li
+                class="page-item"
+                [ngClass]="{
+                  disabled:
+                    currentPage ===
+                      pageNumberArray[pageNumberArray.length - 1] ||
+                    lstLeave.length === 0
+                }"
+              >
+                <a
+                  (click)="getMoreData('next')"
+                  class="page-link"
+                  href="javascript:void(0);"
+                  ><i class="fa fa-angle-double-right"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->
+<!-- Add Leave Modal -->
+<div id="add_leave" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Leave</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Leave Type <span class="text-danger">*</span></label
+            >
+            <mat-select
+              class="input-block mb-3 custom-mat-select"
+              placeholder="Select Leave Type"
+            >
+              <mat-option value="leave">Select Leave Type</mat-option>
+              <mat-option value="2">Casual Leave 12 Days</mat-option>
+              <mat-option value="3">Medical Leave</mat-option>
+              <mat-option value="4">Loss of Pay</mat-option>
+            </mat-select>
+          </div>
+          <div class="input-block mb-3 date-input3">
+            <label class="col-form-label" for=""
+              >From <span class="text-danger">*</span></label
+            >
+            <div class="cal-icon">
+              <input
+                class="form-control datetimepicker"
+                bsDatepicker
+                container=".date-input3"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="input-block mb-3 date-input4">
+            <label class="col-form-label" for=""
+              >To <span class="text-danger">*</span></label
+            >
+            <div class="cal-icon">
+              <input
+                class="form-control datetimepicker"
+                bsDatepicker
+                container=".date-input4"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Number of days <span class="text-danger">*</span></label
+            >
+            <input class="form-control" readonly type="text" />
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Remaining Leaves <span class="text-danger">*</span></label
+            >
+            <input class="form-control" readonly value="12" type="text" />
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Leave Reason <span class="text-danger">*</span></label
+            >
+            <textarea rows="4" class="form-control"></textarea>
+          </div>
+          <div class="submit-section">
+            <button class="btn btn-primary submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Leave Modal -->
+
+<!-- Edit Leave Modal -->
+<div id="edit_leave" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Leave</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Leave Type <span class="text-danger">*</span></label
+            >
+            <mat-select
+              class="input-block mb-3 custom-mat-select"
+              placeholder="Select Leave Type"
+              [(value)]="selected1"
+            >
+              <mat-option value="type">Select Leave Type</mat-option>
+              <mat-option value="10">Casual Leave 12 Days</mat-option>
+              <mat-option value="11">Medical Leave</mat-option>
+              <mat-option value="12">Loss of Pay</mat-option>
+            </mat-select>
+          </div>
+          <div class="input-block mb-3 date-input5">
+            <label class="col-form-label" for=""
+              >From <span class="text-danger">*</span></label
+            >
+            <div class="cal-icon">
+              <input
+                class="form-control datetimepicker"
+                bsDatepicker
+                container=".date-input5"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="input-block mb-3 date-input6">
+            <label class="col-form-label" for=""
+              >To <span class="text-danger">*</span></label
+            >
+            <div class="cal-icon">
+              <input
+                class="form-control datetimepicker"
+                bsDatepicker
+                container=".date-input6"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Number of days <span class="text-danger">*</span></label
+            >
+            <input class="form-control" readonly type="text" value="2" />
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Remaining Leaves <span class="text-danger">*</span></label
+            >
+            <input class="form-control" readonly value="12" type="text" />
+          </div>
+          <div class="input-block mb-3">
+            <label class="col-form-label" for=""
+              >Leave Reason <span class="text-danger">*</span></label
+            >
+            <textarea rows="4" class="form-control">Going to hospital</textarea>
+          </div>
+          <div class="submit-section">
+            <button class="btn btn-primary submit-btn">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Leave Modal -->
+
+<!-- Approve Leave Modal -->
+<div class="modal custom-modal fade" id="approve_leave" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Leave Approve</h3>
+          <p>Are you sure want to approve for this leave?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" class="btn btn-primary continue-btn"
+                >Approve</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                data-bs-dismiss="modal"
+                class="btn btn-primary cancel-btn"
+                >Decline</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Approve Leave Modal -->
+
+<!-- Delete Leave Modal -->
+<div class="modal custom-modal fade" id="delete_approve" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Leave</h3>
+          <p>Are you sure want to delete this leave?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" class="btn btn-primary continue-btn"
+                >Delete</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                data-bs-dismiss="modal"
+                class="btn btn-primary cancel-btn"
+                >Cancel</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Leave Modal -->

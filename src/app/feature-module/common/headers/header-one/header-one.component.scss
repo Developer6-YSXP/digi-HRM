@@ -1,0 +1,12 @@
+.logo::before
+{
+    content: "";
+    position: absolute;
+    left: -15px;
+    right: 0;
+    top: -80px;
+    bottom: 20px;
+    background-color: #fff;
+    filter: blur(45px);
+    z-index: -1;
+}

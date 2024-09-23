@@ -1,0 +1,176 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h1 mat-dialog-title class="modal-header">{{ data.title }}</h1>
+  <button type="button" class="btn-close px-3" (click)="close()"></button>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="mb-5">
+  <form [formGroup]="leaveForm">
+    <div class="input-block mb-3">
+      <label class="col-form-label" for=""
+        >Leave Type <span class="text-danger">*</span></label
+      >
+      <mat-select
+        class="input-block mb-3 custom-mat-select"
+        placeholder="Select Leave Type"
+        formControlName="leaveType"
+        [ngClass]="{
+          hasError:
+            (isSubmitted && c['leaveType'].invalid) ||
+            (c['leaveType'].invalid &&
+              (c['leaveType'].dirty || c['leaveType'].touched))
+        }"
+      >
+        <mat-option value="3">Casual Leave 12 Days</mat-option>
+        <mat-option value="4">Medical Leave</mat-option>
+        <mat-option value="5">Loss of Pay</mat-option>
+      </mat-select>
+      @if((isSubmitted && c['leaveType'].invalid) || (c['leaveType'].invalid &&
+      (c['leaveType'].dirty || c['leaveType'].touched))){
+      <div class="text-danger">
+        @if(c['leaveType'].hasError('required')){
+        <small>{{ "leave Type" | titlecase }} is required.</small>
+        }
+      </div>
+      }
+    </div>
+    <div class="input-block mb-3 date-input1">
+      <label class="col-form-label" for=""
+        >From <span class="text-danger">*</span></label
+      >
+      <div class="cal-icon">
+        <input
+          class="form-control datetimepicker"
+          bsDatepicker
+          container=".date-input1"
+          type="text"
+          placeholder="DD-MM-YYYY"
+          formControlName="fromDate"
+          [ngClass]="{
+            hasError:
+              (isSubmitted && c['fromDate'].invalid) ||
+              (c['fromDate'].invalid &&
+                (c['fromDate'].dirty || c['fromDate'].touched))
+          }"
+        />
+        @if((isSubmitted && c['fromDate'].invalid) || (c['fromDate'].invalid &&
+        (c['fromDate'].dirty || c['fromDate'].touched))){
+        <div class="text-danger">
+          @if(c['fromDate'].hasError('required')){
+          <small>{{ "from Date" | titlecase }} is required.</small>
+          }
+        </div>
+        }
+      </div>
+    </div>
+    <div class="input-block mb-3 date-input2">
+      <label class="col-form-label" for=""
+        >To <span class="text-danger">*</span></label
+      >
+      <div class="cal-icon">
+        <input
+          class="form-control datetimepicker"
+          bsDatepicker
+          container=".date-input2"
+          type="text"
+          placeholder="DD-MM-YYYY"
+          formControlName="toDate"
+          [ngClass]="{
+            hasError:
+              (isSubmitted && c['toDate'].invalid) ||
+              (c['toDate'].invalid &&
+                (c['toDate'].dirty || c['toDate'].touched))
+          }"
+        />
+        @if((isSubmitted && c['toDate'].invalid) || (c['toDate'].invalid &&
+        (c['toDate'].dirty || c['toDate'].touched))){
+        <div class="text-danger">
+          @if(c['toDate'].hasError('required')){
+          <small>{{ "to Date" | titlecase }} is required.</small>
+          }
+        </div>
+        }
+      </div>
+    </div>
+    <div class="input-block mb-3">
+      <label class="col-form-label" for=""
+        >Number of days <span class="text-danger">*</span></label
+      >
+      <input
+        class="form-control"
+        readonly
+        type="text"
+        formControlName="days"
+        placeholder="Please select date"
+        [ngClass]="{
+          hasError:
+            (isSubmitted && c['days'].invalid) ||
+            (c['days'].invalid && (c['days'].dirty || c['days'].touched))
+        }"
+      />
+      @if((isSubmitted && c['days'].invalid) || (c['days'].invalid &&
+      (c['days'].dirty || c['days'].touched))){
+      <div class="text-danger">
+        @if(c['days'].hasError('required')){
+        <small>{{ "number of days" | titlecase }} is required.</small>
+        }
+      </div>
+      }
+    </div>
+    <div class="input-block mb-3">
+      <label class="col-form-label" for=""
+        >Remaining Leaves <span class="text-danger">*</span></label
+      >
+      <input
+        class="form-control"
+        readonly
+        type="text"
+        formControlName="remainingLeaves"
+        [ngClass]="{
+          hasError:
+            (isSubmitted && c['remainingLeaves'].invalid) ||
+            (c['remainingLeaves'].invalid &&
+              (c['remainingLeaves'].dirty || c['remainingLeaves'].touched))
+        }"
+      />
+      @if((isSubmitted && c['remainingLeaves'].invalid) ||
+      (c['remainingLeaves'].invalid && (c['remainingLeaves'].dirty ||
+      c['remainingLeaves'].touched))){
+      <div class="text-danger">
+        @if(c['remainingLeaves'].hasError('required')){
+        <small>{{ "remaining Leaves" | titlecase }} is required.</small>
+        }
+      </div>
+      }
+    </div>
+    <div class="input-block mb-3">
+      <label class="col-form-label" for=""
+        >Leave Reason <span class="text-danger">*</span></label
+      >
+      <textarea
+        rows="4"
+        class="form-control"
+        placeholder="Add Reason"
+        formControlName="reason"
+        [ngClass]="{
+          hasError:
+            (isSubmitted && c['reason'].invalid) ||
+            (c['reason'].invalid && (c['reason'].dirty || c['reason'].touched))
+        }"
+      ></textarea>
+      @if((isSubmitted && c['reason'].invalid) || (c['reason'].invalid &&
+      (c['reason'].dirty || c['reason'].touched))){
+      <div class="text-danger">
+        @if(c['reason'].hasError('required')){
+        <small>{{ "reason" | titlecase }} is required.</small>
+        }
+      </div>
+      }
+    </div>
+    <div class="submit-section d-flex justify-content-end">
+      <button class="btn btn-primary cancel-btn" (click)="close()">
+        {{ data.closeBtn }}
+      </button>
+      <button class="btn btn-primary submit-btn">{{ data.submitBtn }}</button>
+    </div>
+  </form>
+</div>

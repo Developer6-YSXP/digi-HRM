@@ -1,0 +1,276 @@
+.inline-list {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+.inline-list li {
+  display: inline; /* Make list items inline */
+  margin-right: 15px; /* Optional: add some spacing between items */
+  padding: 15px 10px;
+  cursor: pointer;
+}
+
+// .optionLink {
+//   color: #000;
+// }
+
+mat-select,
+.datetimepicker,
+.taskInput {
+  width: 200px;
+  border: 1px solid #e3e3e3 !important;
+  border-radius: 5px;
+  padding: 0 5px 0 5px;
+}
+
+.form-control {
+  border-color: #d3d3d4;
+  border-radius: 40px;
+  box-shadow: none;
+  width: 260px;
+  font-size: 14px;
+  color: #4d5154;
+  height: 40px;
+  line-height: 2;
+  padding: 0px 40px 0px 12px;
+}
+
+.form-control.status {
+  border-color: #d3d3d4;
+  border-radius: 5px;
+  box-shadow: none;
+  width: 260px;
+  font-size: 14px;
+  color: #4d5154;
+  height: 40px;
+  line-height: 2;
+}
+
+.fa-search {
+  padding: 8px;
+  background: #ff902f;
+  border-radius: 20px;
+  position: absolute;
+  right: 29px;
+  color: #fff;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.task-board {
+  background: #fff;
+  padding-top: 15px;
+  margin-top: 10px;
+}
+
+.active {
+  font-weight: bold;
+  color: #ff902f;
+  border-bottom: 2px solid #ff902f;
+}
+
+.board-section {
+  // background: #fff;
+  height: 100%;
+}
+
+.board-overflow {
+  overflow: hidden;
+  overflow-x: scroll; /* Use auto to show scroll only when needed */
+  overflow-y: hidden; /* Hide vertical overflow */
+}
+
+.board-list {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin: 10px;
+}
+
+.board {
+  width: 260px;
+  min-width: 260px;
+  //   height: 100px;
+  background: #f3f3f5;
+  box-shadow: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.board-header p {
+  background: #e6e7e8;
+  width: fit-content;
+  margin: 5px;
+  font-size: 14px;
+  color: #838486;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.count {
+  font-size: 14px;
+  color: #838486;
+  padding-left: 5px;
+}
+
+.status-title {
+  font-size: 12px;
+}
+
+.action-options {
+  color: #838486;
+  padding: 8px;
+
+  .action,
+  .add-task {
+    cursor: pointer;
+  }
+}
+
+.task-options {
+  color: #838486;
+  padding: 8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.board-body {
+  background: #fff;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.project-name {
+  font-size: 12px;
+}
+
+.list-content {
+  padding: 5px;
+  i {
+    color: #a2a4a7;
+    font-size: 13px;
+  }
+}
+
+.statusMenu {
+  width: 200px;
+}
+
+.menu-heading {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.sub-heading {
+  color: #a2a4a7;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.new-group {
+  cursor: pointer;
+  height: fit-content;
+  padding: 5px;
+  width: 140px;
+}
+.new-group:hover {
+  background: #eff0f2;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.group-div {
+  background: #fff;
+  // border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.color-picker {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.taskField {
+  outline: none;
+  border: none;
+}
+
+.taskField:focus-visible {
+  outline: none;
+}
+/* Container for Horizontal Scrolling */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile devices */
+}
+
+.task-table {
+  min-width: 1000px; /* Ensure table has enough width to trigger horizontal scroll */
+}
+
+/* General Table Styling */
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.task-table th,
+.task-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.task-table th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.task-table td {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+/* Add Task Button */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.task-options i {
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.task-options i:hover {
+  color: #007bff;
+}

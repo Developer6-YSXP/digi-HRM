@@ -1,0 +1,113 @@
+<div class="account-page">
+  <div class="main-wrapper">
+    <div class="account-content">
+      <div class="container">
+        <!-- Account Logo -->
+        <div class="account-logo">
+          <img src="assets/img/logos/image.png" alt="Dreams Technologies" />
+        </div>
+        <!-- /Account Logo -->
+
+        <div class="account-box">
+          <div class="account-wrapper">
+            <h3 class="account-title">Login</h3>
+            <p class="account-subtitle">Access to our dashboard</p>
+
+            <!-- Account Form -->
+            <form [formGroup]="loginForm">
+              <div class="input-block">
+                <label class="col-form-label">Email Address</label>
+                <input
+                  [ngClass]="{
+                    hasError:
+                      (isSubmitted && c['email'].invalid) ||
+                      (c['email'].invalid &&
+                        (c['email'].dirty || c['email'].touched))
+                  }"
+                  class="form-control"
+                  placeholder="Enter Email"
+                  type="email"
+                  formControlName="email"
+                />
+                @if((isSubmitted && c['email'].invalid) || (c['email'].invalid
+                && (c['email'].dirty || c['email'].touched))){
+                <div class="text-danger">
+                  @if(c['email'].hasError('required')){
+                  <small>{{ "email" | titlecase }} is required.</small>
+                  } @if(c['email'].hasError('email')){
+                  <small>Please enter valid email address.</small>
+                  }
+                </div>
+                }
+              </div>
+              <div class="input-block">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <label class="col-form-label">Password</label>
+                  </div>
+                  <div class="col-auto">
+                    <a class="text-muted" [routerLink]="routes.forgot_password">
+                      Forgot password?
+                    </a>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{
+                      hasError:
+                        (isSubmitted && loginForm.get('password')?.invalid) ||
+                        (c['password'].invalid &&
+                          (c['password'].dirty || c['password'].touched))
+                    }"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    [type]="password[1] ? 'text' : 'password'"
+                    formControlName="password"
+                    id="password"
+                  />
+                  <span
+                    class="fa-solid"
+                    [ngClass]="password[1] ? 'fa-eye' : 'fa-eye-slash'"
+                    (click)="togglePassword(1)"
+                    id="toggle-password"
+                  ></span>
+                </div>
+                @if( (isSubmitted && loginForm.get('password')?.invalid) ||
+                (c['password'].invalid && (c['password'].dirty ||
+                c['password'].touched))){
+                <div class="text-danger">
+                  @if(c['password'].hasError('required')){
+                  <small>{{ "password" | titlecase }} is required.</small>
+                  } @if(c['password'].errors?.['invalidPassword']){
+                  <small>
+                    Password must include at least one lowercase letter, one
+                    uppercase letter, one number, and one special character, and
+                    be between 8 to 12 characters long.
+                  </small>
+                  }
+                </div>
+                }
+              </div>
+              <div class="input-block mb-4 text-center">
+                <button
+                  class="btn btn-primary account-btn"
+                  type="button"
+                  (click)="navigate()"
+                >
+                  Login
+                </button>
+              </div>
+              <div class="account-footer">
+                <p>
+                  Don't have an account yet?
+                  <a [routerLink]="routes.register">Register</a>
+                </p>
+              </div>
+            </form>
+            <!-- /Account Form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
