@@ -37,6 +37,7 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { PreviewDialogComponent } from './dialogs/preview-dialog/preview-dialog.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AddTaskDialogComponent } from './dialogs/add-task-dialog/add-task-dialog.component';
+import { RolesAndPermissionsComponent } from '../feature-module/account/account-details/roles-and-permissions/roles-and-permissions.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AddTaskDialogComponent } from './dialogs/add-task-dialog/add-task-dialo
     BreakDialogComponent,
     PreviewDialogComponent,
     AddTaskDialogComponent,
+    RolesAndPermissionsComponent,
   ],
   imports: [
     CommonModule,
@@ -112,6 +114,7 @@ import { AddTaskDialogComponent } from './dialogs/add-task-dialog/add-task-dialo
     RouterModule,
     EditorModule,
     ShareProjectDialogComponent,
+    RolesAndPermissionsComponent,
     AddTaskDialogComponent,
     NgxDocViewerModule,
     FullCalendarModule,

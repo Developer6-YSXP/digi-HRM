@@ -18,9 +18,7 @@ export class AddDepartmentDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AddDepartmentDialogComponent>
   ) {}
 
-  ngOnInit(): void {
-    console.log('Dialog data:', this.data.departments);
-  }
+  ngOnInit(): void {}
 
   close(): void {
     this.dialogRef.close();

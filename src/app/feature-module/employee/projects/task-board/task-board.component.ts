@@ -168,7 +168,6 @@ export class TaskBoardComponent implements OnInit {
 
   generateGroup() {
     this.getLightenedColor(this.color);
-    console.log(this.color, this.statusName, this.backgroundColor);
     // Push a new group with the color and statusName parameters
     this.groups.push(
       this.createGroup(this.statusName, this.color, this.backgroundColor)

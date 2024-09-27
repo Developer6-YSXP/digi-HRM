@@ -1842,6 +1842,57 @@ export class DataService {
             },
           ],
         },
+        {
+          menuValue: 'Permissions',
+          route: routes.permissions,
+          hasSubRoute: false,
+          showSubRoute: false,
+          icon: 'key',
+          base: 'role',
+          materialicons: 'Key',
+          subMenus: [],
+        },
+        {
+          menuValue: 'Settings',
+          route: routes.employees,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'cog',
+          base: 'employees',
+          materialicons: 'foundation',
+          subMenus: [
+            {
+              menuValue: 'General Settings',
+              route: routes.generalSetting,
+              base: 'general-setting',
+            },
+            {
+              menuValue: 'Integration Settings',
+              route: routes.integartionSetting,
+              base: 'integration-setting',
+            },
+            {
+              menuValue: 'Notification Setttings',
+              route: routes.notificationSetting,
+              base: 'notification-setting',
+            },
+            {
+              menuValue: 'Profile Setttings',
+              route: routes.profileSetting,
+              base: 'profile-setting',
+            },
+          ],
+        },
+        {
+          menuValue: 'Feedback',
+          route: routes.feedback,
+          hasSubRoute: false,
+          showSubRoute: false,
+          icon: 'comment',
+          base: 'feedback',
+          materialicons: 'comment',
+          subMenus: [],
+        },
       ],
     },
   ];
@@ -3418,6 +3469,27 @@ export class DataService {
     {
       leaveType: 'Loss of Pay',
       leaveDays: '10 Days',
+      id: 3,
+      status: 'Active',
+    },
+  ];
+
+  allIntegrations = [
+    {
+      name: 'Slack',
+      key: 'fqhr9i3h4th9hqrfh3qf9jworfw89troqr',
+      id: 1,
+      status: 'Active',
+    },
+    {
+      name: 'Stripe',
+      key: '3ry9w3eihfiwer9hgwiher94tfewwer9g9herwig',
+      id: 2,
+      status: 'Inactive',
+    },
+    {
+      name: 'Google',
+      key: 'asdcgqu3ertq23r8iwhefhq87wehiwadf8',
       id: 3,
       status: 'Active',
     },

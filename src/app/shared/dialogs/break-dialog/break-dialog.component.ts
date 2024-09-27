@@ -85,8 +85,6 @@ export class BreakDialogComponent {
   }
 
   otherFiled(event: Event): void {
-    console.log(event);
-
     this.radioValue = event;
 
     this.otherReason = this.radioValue === 4 ? true : false;

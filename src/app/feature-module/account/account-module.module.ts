@@ -12,7 +12,6 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
 import { ProjectsComponent } from './account-details/projects/projects.component';
 import { EmployeesMatrixComponent } from './account-details/employees-matrix/employees-matrix.component';
 import { DepartmentsComponent } from './account-details/departments/departments.component';
-import { RolesAndPermissionsComponent } from './account-details/roles-and-permissions/roles-and-permissions.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { RolesAndPermissionsComponent } from './account-details/roles-and-permis
     ProjectsComponent,
     EmployeesMatrixComponent,
     DepartmentsComponent,
-    RolesAndPermissionsComponent,
   ],
 
   imports: [

@@ -198,6 +198,13 @@ export interface allLeaveType {
   status: string;
 }
 
+export interface Integration {
+  name: string;
+  key: string;
+  id: number;
+  status: string;
+}
+
 export interface getTaxes {
   taxName: string;
   taxPercentage: string;

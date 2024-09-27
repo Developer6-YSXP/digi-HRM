@@ -25,7 +25,6 @@ export class LeaveDialogComponent {
 
   ngOnInit(): void {
     this.initForm();
-    console.log('Dialog data:', this.data);
   }
 
   initForm(): void {

@@ -36,7 +36,7 @@ export class routes {
   public static get employee(): string {
     return this.baseUrl + '/dashboard/employee';
   }
-  
+
   public static get apps(): string {
     return this.baseUrl + '/apps';
   }
@@ -75,6 +75,27 @@ export class routes {
   }
   public static get holidays(): string {
     return this.baseUrl + '/employees/holidays';
+  }
+  public static get permissions(): string {
+    return this.baseUrl + '/employees/permissions';
+  }
+  public static get generalSetting(): string {
+    return this.baseUrl + '/employees/general-setting';
+  }
+  public static get accessSetting(): string {
+    return this.baseUrl + '/employees/access-setting';
+  }
+  public static get integartionSetting(): string {
+    return this.baseUrl + '/employees/integration-setting';
+  }
+  public static get notificationSetting(): string {
+    return this.baseUrl + '/employees/notification-setting';
+  }
+  public static get profileSetting(): string {
+    return this.baseUrl + '/employees/profile-setting';
+  }
+  public static get feedback(): string {
+    return this.baseUrl + '/employees/feedback';
   }
   public static get leaveadmin(): string {
     return this.baseUrl + '/employees/leave-admin';
@@ -283,7 +304,7 @@ export class routes {
   public static get shortlist(): string {
     return this.baseUrl + '/jobs/shortlist';
   }
-  
+
   public static get jobview(): string {
     return this.baseUrl + '/jobs/job-view';
   }
@@ -319,6 +340,9 @@ export class routes {
   }
   public static get companysettings(): string {
     return this.baseUrl + '/settings/company-settings';
+  }
+  public static get roleSettings(): string {
+    return this.baseUrl + '/settings/role';
   }
   public static get profile(): string {
     return this.baseUrl + '/profile';
@@ -704,7 +728,7 @@ export class routes {
   public static get color(): string {
     return this.baseUi + '/ui-colors';
   }
-  
+
   public static get chartPrime(): string {
     return this.charts + '/prime-ng';
   }

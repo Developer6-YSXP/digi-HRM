@@ -1,4 +1,4 @@
-import { Component,ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, Event as RouterEvent, NavigationStart } from '@angular/router';
 import { CommonService } from './shared/common/common.service';
 import { url } from './core/core.index';
@@ -8,18 +8,14 @@ import { url } from './core/core.index';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
-
-}) 
+})
 export class AppComponent {
   title = 'template';
   base = '';
   page = '';
   last = '';
 
-  constructor(
-    private common: CommonService,
-    private router: Router,
-  ) {
+  constructor(private common: CommonService, private router: Router) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
     });
@@ -30,13 +26,10 @@ export class AppComponent {
       this.last = res;
     });
     this.router.events.subscribe((data: RouterEvent) => {
-      // console.log('base',this.base);
-      // console.log('page',this.page);
-      // console.log('last',this.last);
       if (data instanceof NavigationStart) {
         this.getRoutes(data);
       }
-    })
+    });
   }
 
   public getRoutes(events: url) {

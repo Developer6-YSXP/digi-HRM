@@ -1,0 +1,72 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="row">
+          <div class="col-sm-6 mx-auto">
+            <h3 class="page-title">Feedback</h3>
+          </div>
+        </div>
+      </div>
+      <!-- /Page Header -->
+
+      <form [formGroup]="feedbackForm">
+        <div class="row">
+          <div class="col-sm-6 mx-auto">
+            <div class="input-block mb-3">
+              <label class="col-form-label"
+                >Name <span class="text-danger">*</span></label
+              >
+              <input
+                class="form-control"
+                placeholder="Enter Name"
+                type="text"
+                formControlName="name"
+              />
+            </div>
+            <div class="input-block mb-3">
+              <label class="col-form-label"
+                >Email <span class="text-danger">*</span></label
+              >
+              <input
+                class="form-control"
+                placeholder="Enter Email"
+                type="email"
+                formControlName="email"
+              />
+            </div>
+            <div class="input-block mb-3">
+              <label class="col-form-label"
+                >Mobile Number <span class="text-danger">*</span></label
+              >
+              <input
+                class="form-control"
+                placeholder="Mobile Number"
+                type="text"
+                formControlName="phone"
+              />
+            </div>
+            <div class="input-block mb-3">
+              <label class="col-form-label"
+                >Message <span class="text-danger">*</span></label
+              >
+              <textarea
+                class="form-control"
+                placeholder="Enter Message..."
+                formControlName="message"
+              ></textarea>
+            </div>
+            <div class="submit-section">
+              <button class="btn btn-primary submit-btn" (click)="submit()">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->

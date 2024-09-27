@@ -168,8 +168,6 @@ export class EmployeeListComponent implements OnInit {
 
         // Combine existing data with new data
         this.lstEmployee = [...this.lstEmployee, ...mappedData];
-
-        console.log(this.lstEmployee);
       };
       reader.readAsBinaryString(file);
     }

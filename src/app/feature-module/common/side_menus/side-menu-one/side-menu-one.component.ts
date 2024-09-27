@@ -42,21 +42,16 @@ export class SideMenuOneComponent implements OnDestroy, OnInit {
         this.base = splitVal[1];
         this.page = splitVal[2];
         this.last = splitVal[3];
-        console.log('base', this.base);
-        console.log('page', this.page);
-        console.log('last', this.last);
       }
     });
     // get sidebar data as observable because data is controlled for design to expand submenus
     if (this.role === 0) {
       this.data.getSideBarData.subscribe((res: Array<SideBar>) => {
         this.side_bar_data = res;
-        console.log(this.side_bar_data);
       });
     } else {
       this.data.getUserSideBarData.subscribe((res: Array<SideBar>) => {
         this.side_bar_data = res;
-        console.log(this.side_bar_data);
       });
     }
     this.common.base.subscribe((res: string) => {

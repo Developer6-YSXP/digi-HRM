@@ -22,6 +22,12 @@ import { ShiftScheduleComponent } from './shift-schedule/shift-schedule.componen
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ShiftListComponent } from './shift-list/shift-list.component';
 import { ReportingTeamComponent } from './reporting-team/reporting-team.component';
+import { PermissionsComponent } from '../permissions/permissions.component';
+import { GeneralSettingsComponent } from '../settings/general-settings/general-settings.component';
+import { IntegrationSettingsComponent } from '../settings/integration-settings/integration-settings.component';
+import { ProfileSettingsComponent } from '../settings/profile-settings/profile-settings.component';
+import { NotificationSettingsComponent } from '../settings/notification-settings/notification-settings.component';
+import { FeedbackComponent } from '../feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,12 @@ import { ReportingTeamComponent } from './reporting-team/reporting-team.componen
     OvertimeComponent,
     ShiftScheduleComponent,
     ShiftListComponent,
+    PermissionsComponent,
+    GeneralSettingsComponent,
+    IntegrationSettingsComponent,
+    ProfileSettingsComponent,
+    NotificationSettingsComponent,
+    FeedbackComponent,
   ],
   imports: [
     CommonModule,
