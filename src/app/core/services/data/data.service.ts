@@ -1893,6 +1893,53 @@ export class DataService {
           materialicons: 'comment',
           subMenus: [],
         },
+        {
+          menuValue: 'Administration Settings',
+          route: routes.employees,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'users-cog',
+          base: 'administration',
+          materialicons: 'foundation',
+          subMenus: [
+            {
+              menuValue: 'User Management',
+              route: routes.users,
+              base: 'user-view',
+            },
+            {
+              menuValue: 'Role Management',
+              route: routes.permissions,
+              base: 'permissions',
+            },
+          ],
+        },
+        {
+          menuValue: 'Reports',
+          route: routes.reports,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'pie-chart',
+          base: 'reports',
+          materialicons: 'web_asset',
+          subMenus: [
+            {
+              menuValue: 'Project Report',
+              route: routes.projectreport,
+              base: 'project-report',
+            },
+            {
+              menuValue: 'Task Report',
+              route: routes.taskreport,
+              base: 'task-report',
+            },
+            {
+              menuValue: 'Team Report',
+              route: routes.employeereport,
+              base: 'employee-report',
+            },
+          ],
+        },
       ],
     },
   ];

@@ -211,6 +211,7 @@ export class AccountListComponent implements OnInit {
     }
     this.getTableData();
   }
+
   private calculateTotalPages(totalData: number, pageSize: number): void {
     this.pageNumberArray = [];
     this.totalPages = totalData / pageSize;
@@ -224,6 +225,7 @@ export class AccountListComponent implements OnInit {
       this.pageSelection.push({ skip: skip, limit: limit });
     }
   }
+
   public changePageSize(): void {
     this.pageSelection = [];
     this.limit = this.pageSize;
@@ -231,6 +233,7 @@ export class AccountListComponent implements OnInit {
     this.currentPage = 1;
     this.getTableData();
   }
+
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   data1: datasModel[] = [{ name: 'Promotion' }, { name: 'Rated' }];
@@ -264,12 +267,14 @@ export class AccountListComponent implements OnInit {
       val[index].name = value;
     }
   }
+
   public filter = false;
   public rating = false;
 
   openFilter() {
     this.filter = !this.filter;
   }
+
   openRating() {
     this.rating = !this.rating;
   }
