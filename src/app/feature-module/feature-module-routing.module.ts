@@ -76,6 +76,12 @@ const routes: Routes = [
           import('./hr/policies/policies.module').then((m) => m.PoliciesModule),
       },
       {
+        path: 'document',
+        loadChildren: () =>
+          import('./hr/onboarding/onboarding.module').then((m) => m.OnboardingModule),
+      },
+
+      {
         path: 'reports',
         loadChildren: () =>
           import('./hr/reports/reports.module').then((m) => m.ReportsModule),

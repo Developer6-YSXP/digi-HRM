@@ -53,7 +53,7 @@
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/quill/dist/quill.js"
-            ],
+              ],
             "allowedCommonJsDependencies": [
               "canvg",
               "apexcharts",

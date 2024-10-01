@@ -205,6 +205,12 @@ export class routes {
   public static get policies(): string {
     return this.baseUrl + '/policies/main';
   }
+  public static get document(): string {
+    return this.baseUrl + '/document/document-verify';
+  }
+  public static get appointment(): string {
+    return this.baseUrl + '/document/appointment';
+  }
   public static get reports(): string {
     return this.baseUrl + '/reports';
   }
