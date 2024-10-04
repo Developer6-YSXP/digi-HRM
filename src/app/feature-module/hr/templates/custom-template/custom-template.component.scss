@@ -1,0 +1,61 @@
+ngx-dropzone {
+  height: 220px !important;
+}
+
+.preview-img {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background: #f2f2f2;
+  margin: 15px;
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  img {
+    height: 100px;
+    width: 200px;
+    border-radius: 5px;
+    object-fit: fill;
+  }
+  .docImg {
+    object-fit: contain;
+  }
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+  }
+}
+
+.subTask-table {
+  th,
+  td {
+    text-align: left;
+    padding: 10px;
+  }
+
+  input,
+  mat-select {
+    height: 30px;
+    padding: 0 5px 0 5px;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+  }
+}
+
+.actions-task i {
+  cursor: pointer;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 50%;
+}

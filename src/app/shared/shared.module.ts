@@ -38,6 +38,7 @@ import { PreviewDialogComponent } from './dialogs/preview-dialog/preview-dialog.
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AddTaskDialogComponent } from './dialogs/add-task-dialog/add-task-dialog.component';
 import { RolesAndPermissionsComponent } from '../feature-module/account/account-details/roles-and-permissions/roles-and-permissions.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { RolesAndPermissionsComponent } from '../feature-module/account/account-
     RouterModule,
     EditorModule,
     NgxDocViewerModule,
+    AngularEditorModule,
   ],
   exports: [
     CommonModule,
@@ -118,6 +120,7 @@ import { RolesAndPermissionsComponent } from '../feature-module/account/account-
     AddTaskDialogComponent,
     NgxDocViewerModule,
     FullCalendarModule,
+    AngularEditorModule,
   ],
 
   providers: [BsDatepickerConfig, DatePipe],

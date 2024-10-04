@@ -1,0 +1,92 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">New Hire Login</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">New Hire Login</li>
+          </ul>
+        </div>
+        <!-- <div class="col-auto float-end ms-auto">
+          <a class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_document"><i
+          class="la la-plus-circle"></i>
+        Add Appointment</a>
+      </div> -->
+    </div>
+  </div>
+  
+<!-- /Page Header -->
+<div class="container mt-4">
+    <!-- Login Section -->
+     <form class="mb-5">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control mt-2" id="email" placeholder="Enter email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control mt-2" id="password" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Login</button>
+    </form>
+ 
+    <hr>
+  
+    <!-- Onboarding Checklist Section -->
+    <h2>Onboarding Checklist</h2>
+    <div class="table-responsive table-newdatatable">
+
+        <table class="table table-new custom-table mb-0 datatable">
+         <thead>
+        <tr>
+          <th>Task</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of onboardingTasks">
+          <td>{{ task.task }}</td>
+          <td>{{ task.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <hr>
+    <!-- Resources Section -->
+    <h2>Resources</h2>
+    <div class="table-responsive table-newdatatable"> 
+    <table class="table table-new custom-table mb-0 datatable">
+      <thead>
+        <tr>
+          <th>Document/Resource</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resource of resources">
+          <td>{{ resource.title }}</td>
+          <td><a [href]="resource.link" target="_blank">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <br>
+    <hr>
+    <!-- Communication Section -->
+    <h2>Message HR</h2>
+    <form (ngSubmit)="sendMessage()">
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" class="form-control mt-2" [(ngModel)]="message" name="message" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Send</button>
+    </form>
+  </div>
+  
+
+</div>

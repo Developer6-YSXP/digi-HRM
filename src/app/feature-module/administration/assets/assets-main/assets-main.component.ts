@@ -50,10 +50,14 @@ export class AssetsMainComponent implements OnInit {
 
   private addAssetFormInit(): void {
     this.assetsForm = new FormGroup({
+      account: new FormControl('', Validators.required),
+      installationDate: new FormControl('', Validators.required),
       assetName: new FormControl('', Validators.required),
       assetId: new FormControl('', Validators.required),
       purchaseDate: new FormControl('', Validators.required),
-      purchaseTo: new FormControl('', Validators.required),
+      poNumber: new FormControl('', Validators.required),
+      warrantyStartDate: new FormControl('', Validators.required),
+      warrantyEndDate: new FormControl('', Validators.required),
       manufacturer: new FormControl('', Validators.required),
       model: new FormControl('', Validators.required),
       serialNo: new FormControl('', Validators.required),

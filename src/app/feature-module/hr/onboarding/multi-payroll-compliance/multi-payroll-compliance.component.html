@@ -1,0 +1,139 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Multi-Payroll Compliance Setup</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Multi-Payroll Compliance Setup</li>
+          </ul>
+        </div>
+        <!-- <div class="col-auto float-end ms-auto">
+          <a class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_document"><i
+          class="la la-plus-circle"></i>
+        Add Appointment</a>
+      </div> -->
+    </div>
+  </div>
+  
+<!-- /Page Header -->
+
+<div class="container mt-4">
+    <form [formGroup]="payrollForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Region Selection -->
+      <div class="form-group">
+        <label for="region">Region</label>
+        <select class="form-control mt-2" id="region" formControlName="region">
+          <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+        </select>
+      </div>
+  
+      <!-- Role Selection -->
+      <div class="form-group mt-3">
+        <label for="role">Employee Role</label>
+        <select class="form-control mt-2" id="role" formControlName="role">
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+      </div>
+  
+      <!-- Payroll Rule Selection -->
+      <div class="form-group mt-3">
+        <label for="payrollRule">Payroll Rule</label>
+        <textarea
+          class="form-control mt-2"
+          id="payrollRule"
+          formControlName="payrollRule"
+          placeholder="Define the payroll rule"
+        ></textarea>
+      </div>
+  
+      <!-- External Payroll System Integration -->
+      <div class="form-group mt-3">
+        <label for="externalSystem">External Payroll System</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="externalSystem"
+          formControlName="externalSystem"
+          placeholder="Enter external payroll system details"
+        />
+      </div>
+  
+      <!-- Notification Setup -->
+      <div class="form-group mt-3">
+        <label for="notification">Send Notifications on Compliance Change</label>
+        <select class="form-control mt-2" id="notification" formControlName="notification">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary mt-4" [disabled]="payrollForm.invalid">
+        Submit Payroll Configuration
+      </button>
+    </form>
+  </div>
+
+  
+  <div class="container mt-4">
+    <h3>Payroll Rule Summary</h3>
+    <div class="table-responsive table-newdatatable">
+    <table class="table table-new custom-table mb-0 datatable">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Role</th>
+          <th>Payroll Rule</th>
+          <th>External System</th>
+          <th>Notification</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let config of payrollConfigs">
+          <td>{{ config.region }}</td>
+          <td>{{ config.role }}</td>
+          <td>{{ config.payrollRule }}</td>
+          <td>{{ config.externalSystem }}</td>
+          <td>{{ config.notification }}</td>
+          <td>
+            <button class="btn btn-info" (click)="editConfig(config)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  
+
+  <div class="container mt-4">
+    <h3>Payroll Compliance Audit Trail</h3>
+    <div class="table-responsive table-newdatatable">
+    <table class="table table-new custom-table mb-0 datatable">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Region</th>
+          <th>Role</th>
+          <th>Action</th>
+          <th>Changed By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of auditLogs">
+          <td>{{ log.timestamp }}</td>
+          <td>{{ log.region }}</td>
+          <td>{{ log.role }}</td>
+          <td>{{ log.action }}</td>
+          <td>{{ log.changedBy }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </div>

@@ -117,6 +117,15 @@ export class DataService {
       })
     );
   }
+
+  public getTemplate(): Observable<apiResultFormat> {
+    return this.http.get<apiResultFormat>('assets/JSON/templates.json').pipe(
+      map((res: apiResultFormat) => {
+        return res;
+      })
+    );
+  }
+
   public getInvoice(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/JSON/invoice-page.json').pipe(
       map((res: apiResultFormat) => {
@@ -1015,6 +1024,38 @@ export class DataService {
       separateRoute: false,
 
       menu: [
+        {
+          menuValue: 'Onboarding',
+          route: routes.onboarding,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'chalkboard',
+          base: 'onboarding',
+          materialicons: 'chalkboard',
+          subMenus: [
+            {
+              menuValue: 'Offer Letter Generation',
+              route: routes.offerLetterGeneration,
+              base: 'offer-letter',
+            },
+          ],
+        },
+        {
+          menuValue: 'Templates',
+          route: routes.templates,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'shapes',
+          base: 'templates',
+          materialicons: 'shapes',
+          subMenus: [
+            {
+              menuValue: 'Custom Email Template',
+              route: routes.customTemplate,
+              base: 'custom-template',
+            },
+          ],
+        },
         {
           menuValue: 'Sales',
           route: routes.sales,

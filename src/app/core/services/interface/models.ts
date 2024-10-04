@@ -248,6 +248,13 @@ export interface getInvoice {
   status: string;
 }
 
+export interface getTemplates {
+  id: number;
+  number: string;
+  name: string;
+  status: string;
+}
+
 export interface items {
   item: string;
   description: string;

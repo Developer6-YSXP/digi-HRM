@@ -1,0 +1,73 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Task Assignments</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Task Assignments</li>
+          </ul>
+        </div>
+        </div>
+    </div>
+  
+<!-- /Page Header -->
+<div class="container mt-4">
+    <!-- Task Assignment Section -->
+    <div class="table-responsive table-newdatatable">
+        <table class="table table-new custom-table mb-0 datatable">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Assignee</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.task }}</td>
+          <td>{{ task.assignee }}</td>
+          <td>{{ task.dueDate }}</td>
+          <td>{{ task.status }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="sendReminder(task)">Send Reminder</button>
+            <button class="btn btn-danger btn-sm" (click)="escalateTask(task)">Escalate</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <br>
+    
+    <h2>Task Completion Reporting</h2><br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-3 mb-3">
+          <h5>Total Tasks</h5>
+          <p>{{ reportData.totalTasks }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 mb-3">
+          <h5>Completed Tasks</h5>
+          <p>{{ reportData.completedTasks }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 mb-3">
+          <h5>Overdue Tasks</h5>
+          <p>{{ reportData.overdueTasks }}</p>
+        </div>
+      </div>
+    </div>
+  <br><br>
+    <h3>Bottlenecks</h3><br>
+    <p>{{ reportData.bottlenecks }}</p>
+  </div>
+</div>

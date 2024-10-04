@@ -6,18 +6,15 @@ import { DocumentVerificationComponent } from './document-verification/document-
 import { SharedModule } from 'src/app/shared/shared.module';
 import { OnboardingComponent } from './onboarding.component';
 import { AppointmentScheduleComponent } from './appointment-schedule/appointment-schedule.component';
-
+import { OfferLetterComponent } from './offer-letter/offer-letter.component';
 
 @NgModule({
   declarations: [
     OnboardingComponent,
     DocumentVerificationComponent,
     AppointmentScheduleComponent
-  ],
-  imports: [
-    CommonModule,
-    OnboardingRoutingModule,
-    SharedModule
-  ]
+  , OfferLetterComponent],
+  imports: [CommonModule, OnboardingRoutingModule,
+    SharedModule],
 })
-export class OnboardingModule { }
+export class OnboardingModule {}

@@ -1,0 +1,148 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Appointment Confirmation & Management</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Appointment Confirmation & Management</li>
+          </ul>
+        </div>
+        <!-- <div class="col-auto float-end ms-auto">
+          <a class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_document"><i
+          class="la la-plus-circle"></i>
+        Add Appointment</a>
+      </div> -->
+    </div>
+  </div>
+  
+<!-- /Page Header -->
+
+<div class="container p-3 ">
+    <form [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
+       
+  
+      <!-- Appointment Details Section -->
+      <div class="form-group">
+        <label for="appointmentId">Appointment ID</label>
+        <input
+          type="text"
+          class="form-control  mt-2"
+          id="appointmentId"
+          formControlName="appointmentId"
+          placeholder="Enter Appointment ID"
+          required
+        />
+      </div>
+  
+      <!-- Employee Details Section -->
+      <div class="form-group mt-3">
+        <label for="employeeName">Employee name</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="employeeName"
+          formControlName="employeeName"
+          placeholder="Enter Employee Name"
+          required
+        />
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="employeeId">Employee ID</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="employeeId"
+          formControlName="employeeId"
+          placeholder="Enter Employee ID"
+          required
+        />
+      </div>
+  
+      <!-- Accept/Reject Buttons -->
+      <div class="form-group mt-4">
+        <label>Confirm or Reject Appointment</label>
+        <div class="btn-group" role="group">
+          <button
+            type="button"
+            class="btn btn-success"
+            style="margin-left: 10px;"
+            (click)="confirmAppointment(true)"
+          >
+            Accept
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            style="margin-left: 10px;"
+            (click)="confirmAppointment(false)"
+          >
+            Reject
+          </button>
+        </div>
+      </div>
+  
+      <!-- Reason for Rejection (conditional) -->
+      <div *ngIf="showRejectionReason" class="form-group mt-3">
+        <label for="reason">Reason for Rejection</label>
+        <textarea
+          class="form-control mt-2"
+          id="reason"
+          formControlName="reason"
+          placeholder="Provide reason for rejection"
+          required
+        ></textarea>
+      </div>
+  
+      <!-- Rescheduling Section (conditional) -->
+      <div *ngIf="showRescheduleOption" class="form-group mt-3">
+        <label for="reschedule">Proposed Reschedule Date</label>
+        <input
+          type="date"
+          class="form-control mt-2"
+          id="reschedule"
+          formControlName="rescheduleDate"
+          required
+        />
+      </div>
+  
+      <!-- Follow-up Notifications -->
+      <div class="form-group mt-3">
+        <label for="followUp">Send Follow-up Notification</label>
+        <select
+          class="form-control mt-2"
+          id="followUp"
+          formControlName="followUpNotification"
+        >
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+  
+      <!-- Comments Section -->
+      <div class="form-group mt-3">
+        <label for="comments">Additional Comments (Optional)</label>
+        <textarea
+          class="form-control mt-2"
+          id="comments"
+          formControlName="comments"
+          placeholder="Any additional comments"
+        ></textarea>
+      </div>
+  
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary mt-4"
+        [disabled]="confirmationForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+
+  </div>
+  

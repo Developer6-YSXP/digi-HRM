@@ -66,6 +66,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'templates',
+        loadChildren: () =>
+          import('./hr/templates/templates.module').then(
+            (m) => m.TemplatesModule
+          ),
+      },
+      {
+        path: 'onboarding',
+        loadChildren: () =>
+          import('./hr/onboarding/onboarding.module').then(
+            (m) => m.OnboardingModule
+          ),
+      },
+      {
         path: 'payroll',
         loadChildren: () =>
           import('./hr/payroll/payroll.module').then((m) => m.PayrollModule),
