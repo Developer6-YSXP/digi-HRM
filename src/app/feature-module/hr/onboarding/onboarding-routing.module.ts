@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DocumentVerificationComponent } from './document-verification/document-verification.component';
 import { OnboardingComponent } from './onboarding.component';
 import { AppointmentScheduleComponent } from './appointment-schedule/appointment-schedule.component';
+import { OfferLetterComponent } from './offer-letter/offer-letter.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     component: OnboardingComponent,
     children:[
        { path:'document-verify',  component: DocumentVerificationComponent },
-       { path: 'appointment', component:AppointmentScheduleComponent }
+       { path: 'appointment', component:AppointmentScheduleComponent },
+       { path: 'offer-letter', component: OfferLetterComponent }
     ]
   }
 ];

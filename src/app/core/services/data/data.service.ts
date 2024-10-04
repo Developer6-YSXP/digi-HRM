@@ -1038,6 +1038,65 @@ export class DataService {
               route: routes.offerLetterGeneration,
               base: 'offer-letter',
             },
+            {
+              menuValue: 'Document',
+              route: routes.document,
+              base: 'onboarding',
+            },
+            {
+              menuValue: 'Appointment-Schedule',
+              route: routes.appointment,
+              base: 'appointment',
+
+            },
+            {
+              menuValue: 'Confirmation-Process',
+              route: routes.confirmation,
+              base: 'confirmation',
+
+            },
+            {
+              menuValue: 'Interview-Feedback',
+              route: routes.interviewFeedback,
+              base: 'interview-feedback',
+
+            },
+            {
+              menuValue: 'Multi-Payroll',
+              route: routes.multiPayroll,
+              base: 'multi-payroll',
+
+            },
+            {
+              menuValue: 'Payroll-Confirguration',
+              route: routes.payrollConfirguration,
+              base: 'payroll-confirguration',
+
+            },
+            {
+              menuValue: 'Onboarding-Management',
+              route: routes.checklistManagement,
+              base: 'onboarding-checklist',
+
+            },
+            {
+              menuValue: 'New Hire Portal',
+              route: routes.hirePortal,
+              base: 'hire-portal',
+                            
+            },
+            {
+              menuValue: 'Reporting & Analytics',
+              route: routes.reporting,
+              base: 'reporting-analytics',
+              
+            },
+            {
+              menuValue: 'Task Automation',
+              route: routes.taskAutomation,
+              base: 'task-automation',
+              
+            },
           ],
         },
         {
@@ -1220,27 +1279,7 @@ export class DataService {
               base: 'daily-report',
             },
           ],
-        },
-        {
-          menuValue: 'Document',
-          route: routes.document,
-          hasSubRoute: false,
-          showSubRoute: false,
-          icon: 'file-pdf-o',
-          base: 'document',
-          materialicons: 'do_not_disturb_alt',
-          subMenus: [],
-        },
-        {
-          menuValue: 'Appointment-Schedule',
-          route: routes.appointment,
-          hasSubRoute: false,
-          showSubRoute: false,
-          icon: 'file-pdf-o',
-          base: 'appointment',
-          materialicons: 'do_not_disturb_alt',
-          subMenus: [],
-        },
+        },      
       ],
     },
     {

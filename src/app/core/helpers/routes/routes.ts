@@ -214,14 +214,38 @@ export class routes {
   public static get salaryview(): string {
     return this.baseUrl + '/payroll/salary-view';
   }
+  public static get confirmation(): string {
+    return this.baseUrl + '/onboarding/confirmation';
+  }
+  public static get interviewFeedback(): string {
+    return this.baseUrl + '/onboarding/interview-feedback';
+  }
+  public static get multiPayroll(): string {
+    return this.baseUrl + '/onboarding/multi-payroll';
+  }
+  public static get payrollConfirguration(): string {
+    return this.baseUrl + '/onboarding/payroll-confirguration';
+  }
+  public static get taskAutomation(): string {
+    return this.baseUrl + '/onboarding/task-automation';
+  }
+  public static get checklistManagement(): string {
+    return this.baseUrl + '/onboarding/onboarding-checklist';
+  }
+  public static get hirePortal(): string {
+    return this.baseUrl + '/onboarding/hire-portal';
+  }
+  public static get reporting(): string {
+    return this.baseUrl + '/onboarding/reporting-analytics';
+  }
   public static get policies(): string {
     return this.baseUrl + '/policies/main';
   }
   public static get document(): string {
-    return this.baseUrl + '/document/document-verify';
+    return this.baseUrl + '/onboarding/document-verify';
   }
   public static get appointment(): string {
-    return this.baseUrl + '/document/appointment';
+    return this.baseUrl + '/onboarding/appointment';
   }
   public static get reports(): string {
     return this.baseUrl + '/reports';
