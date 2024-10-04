@@ -172,6 +172,18 @@ export class routes {
   public static get taxes(): string {
     return this.baseUrl + '/sales/taxes';
   }
+  public static get templates(): string {
+    return this.baseUrl + '/templates';
+  }
+  public static get customTemplate(): string {
+    return this.baseUrl + '/templates/custom-template';
+  }
+  public static get onboarding(): string {
+    return this.baseUrl + '/onboarding';
+  }
+  public static get offerLetterGeneration(): string {
+    return this.baseUrl + '/onboarding/offer-letter';
+  }
   public static get accounting(): string {
     return this.baseUrl + '/accounting';
   }

@@ -344,6 +344,67 @@
           <div class="row">
             <div class="col-md-6">
               <div class="input-block mb-3">
+                <label class="col-form-label" for="">Account</label>
+                <mat-select
+                  placeholder="John Doe"
+                  class="custom-mat-select"
+                  formControlName="account"
+                >
+                  <mat-option value="1">Yellowstone</mat-option>
+                  <mat-option value="2">It Soft</mat-option>
+                </mat-select>
+
+                @if (assetsForm.get('assetName')?.invalid &&
+                assetsForm.get('assetName')?.touched) {
+                <div>
+                  @if (assetsForm.get('assetName')?.invalid &&
+                  assetsForm.get('assetName')?.touched) {
+                  <small class="text-danger"> *Asset name is required</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-block mb-3 date-input6">
+                <label class="col-form-label" for="">Installation Date</label>
+                <input
+                  class="form-control datetimepicker"
+                  type="text"
+                  bsDatepicker
+                  type="text"
+                  container=".date-input6"
+                  [class.invalid]="
+                    assetsForm.get('installationDate')?.invalid &&
+                    assetsForm.get('installationDate')?.touched
+                  "
+                  formControlName="installationDate"
+                />
+
+                @if (assetsForm.get('installationDate')?.invalid &&
+                assetsForm.get('installationDate')?.touched) {
+                <div>
+                  @if (assetsForm.get('installationDate')?.invalid &&
+                  assetsForm.get('installationDate')?.touched) {
+                  <small class="text-danger"> *Purchase Date is required</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            @if (assetsForm.get('assetId')?.invalid &&
+            assetsForm.get('assetId')?.touched) {
+            <div>
+              @if (assetsForm.get('assetId')?.invalid &&
+              assetsForm.get('assetId')?.touched) {
+              <small class="text-danger"> *Asset Id is required</small>
+              }
+            </div>
+            }
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-block mb-3">
                 <label class="col-form-label" for="">Asset Name</label>
                 <input
                   class="form-control"
@@ -393,7 +454,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="input-block mb-3 date-input3">
-                <label class="col-form-label" for="">Purchase From</label>
+                <label class="col-form-label" for="">Purchase Date</label>
                 <input
                   class="form-control datetimepicker"
                   type="text"
@@ -419,8 +480,59 @@
               </div>
             </div>
             <div class="col-md-6">
+              <div class="input-block mb-3">
+                <label class="col-form-label" for="">PO Number</label>
+                <input
+                  class="form-control datetimepicker"
+                  type="text"
+                  formControlName="poNumber"
+                />
+
+                @if (assetsForm.get('poNumber')?.invalid &&
+                assetsForm.get('poNumber')?.touched) {
+                <div>
+                  @if (assetsForm.get('poNumber')?.invalid &&
+                  assetsForm.get('poNumber')?.touched) {
+                  <small class="text-danger"> *PO Number is required</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-block mb-3 date-input5">
+                <label class="col-form-label" for="">Warranty Start Date</label>
+                <input
+                  class="form-control datetimepicker"
+                  type="text"
+                  bsDatepicker
+                  type="text"
+                  container=".date-input5"
+                  [class.invalid]="
+                    assetsForm.get('warrantyStartDate')?.invalid &&
+                    assetsForm.get('warrantyStartDate')?.touched
+                  "
+                  formControlName="warrantyStartDate"
+                />
+
+                @if (assetsForm.get('warrantyStartDate')?.invalid &&
+                assetsForm.get('warrantyStartDate')?.touched) {
+                <div>
+                  @if (assetsForm.get('warrantyStartDate')?.invalid &&
+                  assetsForm.get('warrantyStartDate')?.touched) {
+                  <small class="text-danger">
+                    *Warranty Start Date is required</small
+                  >
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            <div class="col-md-6">
               <div class="input-block mb-3 date-input4">
-                <label class="col-form-label" for="">Purchase To</label>
+                <label class="col-form-label" for="">Warranty End Date</label>
                 <input
                   class="form-control datetimepicker"
                   type="text"
@@ -428,18 +540,20 @@
                   type="text"
                   container=".date-input4"
                   [class.invalid]="
-                    assetsForm.get('purchaseTo')?.invalid &&
-                    assetsForm.get('purchaseTo')?.touched
+                    assetsForm.get('warrantyEndDate')?.invalid &&
+                    assetsForm.get('warrantyEndDate')?.touched
                   "
-                  formControlName="purchaseTo"
+                  formControlName="warrantyEndDate"
                 />
 
-                @if (assetsForm.get('purchaseTo')?.invalid &&
-                assetsForm.get('purchaseTo')?.touched) {
+                @if (assetsForm.get('warrantyEndDate')?.invalid &&
+                assetsForm.get('warrantyEndDate')?.touched) {
                 <div>
-                  @if (assetsForm.get('purchaseTo')?.invalid &&
-                  assetsForm.get('purchaseTo')?.touched) {
-                  <small class="text-danger"> *Purchase To is required</small>
+                  @if (assetsForm.get('warrantyEndDate')?.invalid &&
+                  assetsForm.get('warrantyEndDate')?.touched) {
+                  <small class="text-danger">
+                    *Warranty End Date is required</small
+                  >
                   }
                 </div>
                 }
@@ -485,7 +599,7 @@
                 <input
                   class="form-control"
                   type="text"
-                  formControlName="supplier "
+                  formControlName="supplier"
                 />
               </div>
             </div>
@@ -584,6 +698,10 @@
                   <mat-option value="2">Approved</mat-option>
                   <mat-option value="3">Deployed</mat-option>
                   <mat-option value="4">Damaged</mat-option>
+                  <mat-option value="5">Under Warranty</mat-option>
+                  <mat-option value="6">AMC</mat-option>
+                  <mat-option value="7">Warranty Expire</mat-option>
+                  <mat-option value="8">Demo</mat-option>
                 </mat-select>
               </div>
             </div>
@@ -618,13 +736,87 @@
           <div class="row">
             <div class="col-md-6">
               <div class="input-block mb-3">
+                <label class="col-form-label" for="">Account</label>
+                <mat-select
+                  placeholder="John Doe"
+                  class="custom-mat-select"
+                  formControlName="account"
+                >
+                  <mat-option value="1">Yellowstone</mat-option>
+                  <mat-option value="2">It Soft</mat-option>
+                </mat-select>
+
+                @if (assetsForm.get('assetName')?.invalid &&
+                assetsForm.get('assetName')?.touched) {
+                <div>
+                  @if (assetsForm.get('assetName')?.invalid &&
+                  assetsForm.get('assetName')?.touched) {
+                  <small class="text-danger"> *Asset name is required</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-block mb-3 date-input6">
+                <label class="col-form-label" for="">Installation Date</label>
+                <input
+                  class="form-control datetimepicker"
+                  type="text"
+                  bsDatepicker
+                  type="text"
+                  container=".date-input6"
+                  [class.invalid]="
+                    assetsForm.get('installationDate')?.invalid &&
+                    assetsForm.get('installationDate')?.touched
+                  "
+                  formControlName="installationDate"
+                />
+
+                @if (assetsForm.get('installationDate')?.invalid &&
+                assetsForm.get('installationDate')?.touched) {
+                <div>
+                  @if (assetsForm.get('installationDate')?.invalid &&
+                  assetsForm.get('installationDate')?.touched) {
+                  <small class="text-danger"> *Purchase Date is required</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            @if (assetsForm.get('assetId')?.invalid &&
+            assetsForm.get('assetId')?.touched) {
+            <div>
+              @if (assetsForm.get('assetId')?.invalid &&
+              assetsForm.get('assetId')?.touched) {
+              <small class="text-danger"> *Asset Id is required</small>
+              }
+            </div>
+            }
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-block mb-3">
                 <label class="col-form-label" for="">Asset Name</label>
                 <input
                   class="form-control"
                   type="text"
-                  value="Dell Laptop"
+                  [class.invalid]="
+                    assetsForm.get('assetName')?.invalid &&
+                    assetsForm.get('assetName')?.touched
+                  "
                   formControlName="assetName"
                 />
+
+                @if (assetsForm.get('assetName')?.invalid &&
+                assetsForm.get('assetName')?.touched) {
+                <div>
+                  @if (assetsForm.get('assetName')?.invalid &&
+                  assetsForm.get('assetName')?.touched) {
+                  <small class="text-danger"> *Asset name is required</small>
+                  }
+                </div>
+                }
               </div>
             </div>
             <div class="col-md-6">
@@ -633,32 +825,130 @@
                 <input
                   class="form-control"
                   type="text"
-                  value="#AST-0001"
-                  readonly
+                  [class.invalid]="
+                    assetsForm.get('assetId')?.invalid &&
+                    assetsForm.get('assetId')?.touched
+                  "
                   formControlName="assetId"
                 />
+              </div>
+              @if (assetsForm.get('assetId')?.invalid &&
+              assetsForm.get('assetId')?.touched) {
+              <div>
+                @if (assetsForm.get('assetId')?.invalid &&
+                assetsForm.get('assetId')?.touched) {
+                <small class="text-danger"> *Asset Id is required</small>
+                }
+              </div>
+              }
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-block mb-3 date-input3">
+                <label class="col-form-label" for="">Purchase Date</label>
+                <input
+                  class="form-control datetimepicker"
+                  type="text"
+                  bsDatepicker
+                  type="text"
+                  container=".date-input3"
+                  [class.invalid]="
+                    assetsForm.get('purchaseDate')?.invalid &&
+                    assetsForm.get('purchaseDate')?.touched
+                  "
+                  formControlName="purchaseDate"
+                />
+
+                @if (assetsForm.get('purchaseDate')?.invalid &&
+                assetsForm.get('purchaseDate')?.touched) {
+                <div>
+                  @if (assetsForm.get('purchaseDate')?.invalid &&
+                  assetsForm.get('purchaseDate')?.touched) {
+                  <small class="text-danger"> *Purchase Date is required</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-block mb-3">
+                <label class="col-form-label" for="">PO Number</label>
+                <input
+                  class="form-control datetimepicker"
+                  type="text"
+                  formControlName="poNumber"
+                />
+
+                @if (assetsForm.get('poNumber')?.invalid &&
+                assetsForm.get('poNumber')?.touched) {
+                <div>
+                  @if (assetsForm.get('poNumber')?.invalid &&
+                  assetsForm.get('poNumber')?.touched) {
+                  <small class="text-danger"> *PO Number is required</small>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
-              <div class="input-block mb-3">
-                <label class="col-form-label" for="">Purchase Date</label>
+              <div class="input-block mb-3 date-input5">
+                <label class="col-form-label" for="">Warranty Start Date</label>
                 <input
                   class="form-control datetimepicker"
                   type="text"
-                  formControlName="purchaseDate"
+                  bsDatepicker
+                  type="text"
+                  container=".date-input5"
+                  [class.invalid]="
+                    assetsForm.get('warrantyStartDate')?.invalid &&
+                    assetsForm.get('warrantyStartDate')?.touched
+                  "
+                  formControlName="warrantyStartDate"
                 />
+
+                @if (assetsForm.get('warrantyStartDate')?.invalid &&
+                assetsForm.get('warrantyStartDate')?.touched) {
+                <div>
+                  @if (assetsForm.get('warrantyStartDate')?.invalid &&
+                  assetsForm.get('warrantyStartDate')?.touched) {
+                  <small class="text-danger">
+                    *Warranty Start Date is required</small
+                  >
+                  }
+                </div>
+                }
               </div>
             </div>
             <div class="col-md-6">
-              <div class="input-block mb-3">
-                <label class="col-form-label" for="">Purchase From</label>
+              <div class="input-block mb-3 date-input4">
+                <label class="col-form-label" for="">Warranty End Date</label>
                 <input
-                  class="form-control"
+                  class="form-control datetimepicker"
                   type="text"
-                  formControlName="purchaseTo"
+                  bsDatepicker
+                  type="text"
+                  container=".date-input4"
+                  [class.invalid]="
+                    assetsForm.get('warrantyEndDate')?.invalid &&
+                    assetsForm.get('warrantyEndDate')?.touched
+                  "
+                  formControlName="warrantyEndDate"
                 />
+
+                @if (assetsForm.get('warrantyEndDate')?.invalid &&
+                assetsForm.get('warrantyEndDate')?.touched) {
+                <div>
+                  @if (assetsForm.get('warrantyEndDate')?.invalid &&
+                  assetsForm.get('warrantyEndDate')?.touched) {
+                  <small class="text-danger">
+                    *Warranty End Date is required</small
+                  >
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -722,8 +1012,22 @@
                   class="form-control"
                   type="text"
                   placeholder="In Months"
+                  [class.invalid]="
+                    assetsForm.get('warranty')?.invalid &&
+                    assetsForm.get('warranty')?.touched
+                  "
                   formControlName="warranty"
                 />
+
+                @if (assetsForm.get('warranty')?.invalid &&
+                assetsForm.get('warranty')?.touched) {
+                <div>
+                  @if (assetsForm.get('warranty')?.invalid &&
+                  assetsForm.get('warranty')?.touched) {
+                  <small class="text-danger"> *Warranty is required</small>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -735,16 +1039,29 @@
                   placeholder="$1800"
                   class="form-control"
                   type="text"
+                  [class.invalid]="
+                    assetsForm.get('value')?.invalid &&
+                    assetsForm.get('value')?.touched
+                  "
                   formControlName="value"
                 />
+                @if (assetsForm.get('value')?.invalid &&
+                assetsForm.get('value')?.touched) {
+                <div>
+                  @if (assetsForm.get('value')?.invalid &&
+                  assetsForm.get('value')?.touched) {
+                  <small class="text-danger"> *Value is required</small>
+                  }
+                </div>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-block mb-3">
                 <label class="col-form-label" for="">Asset User</label>
                 <mat-select
-                  class="custom-mat-select"
                   placeholder="John Doe"
+                  class="custom-mat-select"
                   formControlName="assetUser"
                 >
                   <mat-option value="1">John Doe</mat-option>
@@ -773,12 +1090,16 @@
                   <mat-option value="2">Approved</mat-option>
                   <mat-option value="3">Deployed</mat-option>
                   <mat-option value="4">Damaged</mat-option>
+                  <mat-option value="5">Under Warranty</mat-option>
+                  <mat-option value="6">AMC</mat-option>
+                  <mat-option value="7">Warranty Expire</mat-option>
+                  <mat-option value="8">Demo</mat-option>
                 </mat-select>
               </div>
             </div>
           </div>
           <div class="submit-section">
-            <button class="btn btn-primary submit-btn">Save</button>
+            <button class="btn btn-primary submit-btn">Submit</button>
           </div>
         </form>
       </div>

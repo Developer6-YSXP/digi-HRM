@@ -1,0 +1,895 @@
+<div class="col-md-12">
+  <div class="card bg-transparent">
+    <div class="card-header">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <h3 class="page-title">Onboarding Process</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="routes.adminDashboard">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">Onboarding</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- /Page Header -->
+    </div>
+    <div class="card-body">
+      <ul class="nav nav-tabs nav-tabs-bottom nav-justified mb-3">
+        <li class="nav-item">
+          <a class="nav-link active" href="#basic" data-bs-toggle="tab"
+            >Basic</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#salary" data-bs-toggle="tab">Salary</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#preview" data-bs-toggle="tab">Preview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#send-email" data-bs-toggle="tab"
+            >Send Email</a
+          >
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane show active" id="basic">
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="basicDetailsForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Full Name <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="name"
+                        placeholder="Enter Full Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Email <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="email"
+                        class="form-control"
+                        formControlName="email"
+                        placeholder="Enter Email"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3 date-input2">
+                      <label class="col-form-label"
+                        >Date of Joining
+                        <span class="text-danger">*</span></label
+                      >
+                      <div class="cal-icon">
+                        <input
+                          class="form-control datetimepicker"
+                          type="text"
+                          bsDatepicker
+                          container=".date-input2"
+                          formControlName="dateOfJoining"
+                          placeholder="Select Date of Joining"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3 date-input2">
+                      <label class="col-form-label"
+                        >Enter Date When Offer is Made
+                        <span class="text-danger">*</span></label
+                      >
+                      <div class="cal-icon">
+                        <input
+                          class="form-control datetimepicker"
+                          type="text"
+                          bsDatepicker
+                          container=".date-input2"
+                          formControlName="offerDate"
+                          placeholder="Select Date"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Designation <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="designation"
+                        placeholder="Enter Designation"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Job Type <span class="text-danger">*</span></label
+                      >
+
+                      <mat-select
+                        class="form-control"
+                        formControlName="jobType"
+                        placeholder="Enter Job Type"
+                      >
+                        <mat-option value="1">Full Time</mat-option>
+                        <mat-option value="2">Part Time</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Manager Name <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="managerName"
+                        placeholder="Enter Manager Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Notice Period (Days)
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="noticePeriod"
+                        placeholder="Enter No. of days"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <mat-divider></mat-divider>
+                <div class="row mt-3" formGroupName="workAddress">
+                  <h4 class="text-primary">Work Address</h4>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Street <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="street"
+                        placeholder="Enter Street"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >City <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="city"
+                        placeholder="Enter City"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >State <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="state"
+                        placeholder="Enter State"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Country <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="country"
+                        placeholder="Enter Country"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Pincode <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="pincode"
+                        placeholder="Enter Pincode"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <mat-divider></mat-divider>
+                <div class="row mt-3" formGroupName="candidateAddress">
+                  <h4 class="text-primary">Candidate Address</h4>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Street <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="street"
+                        placeholder="Enter Street"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >City <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="city"
+                        placeholder="Enter City"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >State <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="state"
+                        placeholder="Enter State"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Country <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="country"
+                        placeholder="Enter Country"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label"
+                        >Pincode <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="pincode"
+                        placeholder="Enter Pincode"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="submit-section">
+                  <button
+                    class="btn btn-primary submit-btn"
+                    (click)="onSubmit('basic')"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="salary">
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="addSalary">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Select Staff</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('name')?.invalid &&
+                          addSalary.get('name')?.touched
+                        "
+                        formControlName="name"
+                        placeholder="Enter candidate name"
+                      />
+                      @if (addSalary.get('name')?.invalid &&
+                      addSalary.get('name')?.touched) {
+                      <div>
+                        @if (addSalary.get('name')?.invalid &&
+                        addSalary.get('name')?.touched) {
+                        <small class="text-danger"> *Name is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-form-label" for="">Net Salary</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      [class.invalid]="
+                        addSalary.get('netSalary')?.invalid &&
+                        addSalary.get('netSalary')?.touched
+                      "
+                      formControlName="netSalary"
+                      placeholder="Enter Net Salary"
+                    />
+                    @if (addSalary.get('netSalary')?.invalid &&
+                    addSalary.get('netSalary')?.touched) {
+                    <div>
+                      @if (addSalary.get('netSalary')?.invalid &&
+                      addSalary.get('netSalary')?.touched) {
+                      <small class="text-danger"> *Salary is required</small>
+                      }
+                    </div>
+                    }
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h4 class="text-primary">Earnings</h4>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Basic</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="basic"
+                        [class.invalid]="
+                          addSalary.get('basic')?.invalid &&
+                          addSalary.get('basic')?.touched
+                        "
+                        placeholder="Enter Basic"
+                      />
+                      @if (addSalary.get('basic')?.invalid &&
+                      addSalary.get('basic')?.touched) {
+                      <div>
+                        @if (addSalary.get('basic')?.invalid &&
+                        addSalary.get('basic')?.touched) {
+                        <small class="text-danger"> *Basic is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">DA(40%)</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('da')?.invalid &&
+                          addSalary.get('da')?.touched
+                        "
+                        formControlName="da"
+                        placeholder="Enter DA"
+                      />
+                      @if (addSalary.get('da')?.invalid &&
+                      addSalary.get('da')?.touched) {
+                      <div>
+                        @if (addSalary.get('da')?.invalid &&
+                        addSalary.get('da')?.touched) {
+                        <small class="text-danger"> *DA is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">HRA(15%)</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('hra')?.invalid &&
+                          addSalary.get('hra')?.touched
+                        "
+                        formControlName="hra"
+                        placeholder="Enter HRA"
+                      />
+                      @if (addSalary.get('hra')?.invalid &&
+                      addSalary.get('hra')?.touched) {
+                      <div>
+                        @if (addSalary.get('hra')?.invalid &&
+                        addSalary.get('hra')?.touched) {
+                        <small class="text-danger"> *HRA is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Conveyance</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('conveyance')?.invalid &&
+                          addSalary.get('conveyance')?.touched
+                        "
+                        formControlName="conveyance"
+                        placeholder="Enter Conveyance"
+                      />
+                      @if (addSalary.get('conveyance')?.invalid &&
+                      addSalary.get('conveyance')?.touched) {
+                      <div>
+                        @if (addSalary.get('conveyance')?.invalid &&
+                        addSalary.get('conveyance')?.touched) {
+                        <small class="text-danger">
+                          *Conveyance is required</small
+                        >
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Allowance</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('allowance')?.invalid &&
+                          addSalary.get('allowance')?.touched
+                        "
+                        formControlName="allowance"
+                        placeholder="Enter Allowance"
+                      />
+                      @if (addSalary.get('allowance')?.invalid &&
+                      addSalary.get('allowance')?.touched) {
+                      <div>
+                        @if (addSalary.get('allowance')?.invalid &&
+                        addSalary.get('allowance')?.touched) {
+                        <small class="text-danger">
+                          *Allowance is required</small
+                        >
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for=""
+                        >Medical Allowance</label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('medicalAllowance')?.invalid &&
+                          addSalary.get('medicalAllowance')?.touched
+                        "
+                        formControlName="medicalAllowance"
+                        placeholder="Enter Medical Allowance"
+                      />
+                      @if (addSalary.get('medicalAllowance')?.invalid &&
+                      addSalary.get('medicalAllowance')?.touched) {
+                      <div>
+                        @if (addSalary.get('medicalAllowance')?.invalid &&
+                        addSalary.get('medicalAllowance')?.touched) {
+                        <small class="text-danger">
+                          *Medical allowance is required</small
+                        >
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Others</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('othersAdd')?.invalid &&
+                          addSalary.get('othersAdd')?.touched
+                        "
+                        formControlName="othersAdd"
+                        placeholder="Other"
+                      />
+                      @if (addSalary.get('othersAdd')?.invalid &&
+                      addSalary.get('othersAdd')?.touched) {
+                      <div>
+                        @if (addSalary.get('othersAdd')?.invalid &&
+                        addSalary.get('othersAdd')?.touched) {
+                        <small class="text-danger"> *Others is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h4 class="text-primary">Deductions</h4>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">TDS</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('tds')?.invalid &&
+                          addSalary.get('tds')?.touched
+                        "
+                        formControlName="tds"
+                        placeholder="Enter TDS"
+                      />
+                      @if (addSalary.get('tds')?.invalid &&
+                      addSalary.get('tds')?.touched) {
+                      <div>
+                        @if (addSalary.get('tds')?.invalid &&
+                        addSalary.get('tds')?.touched) {
+                        <small class="text-danger"> *TDS is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">ESI</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('esi')?.invalid &&
+                          addSalary.get('esi')?.touched
+                        "
+                        formControlName="esi"
+                        placeholder="Enter ESI"
+                      />
+                      @if (addSalary.get('esi')?.invalid &&
+                      addSalary.get('esi')?.touched) {
+                      <div>
+                        @if (addSalary.get('esi')?.invalid &&
+                        addSalary.get('esi')?.touched) {
+                        <small class="text-danger"> *ESI is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">PF</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('pf')?.invalid &&
+                          addSalary.get('pf')?.touched
+                        "
+                        formControlName="pf"
+                        placeholder="Enter PF"
+                      />
+                      @if (addSalary.get('pf')?.invalid &&
+                      addSalary.get('pf')?.touched) {
+                      <div>
+                        @if (addSalary.get('pf')?.invalid &&
+                        addSalary.get('pf')?.touched) {
+                        <small class="text-danger"> *PF is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Leave</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('leave')?.invalid &&
+                          addSalary.get('leave')?.touched
+                        "
+                        formControlName="leave"
+                        placeholder="Enter Leave"
+                      />
+                      @if (addSalary.get('leave')?.invalid &&
+                      addSalary.get('leave')?.touched) {
+                      <div>
+                        @if (addSalary.get('leave')?.invalid &&
+                        addSalary.get('leave')?.touched) {
+                        <small class="text-danger"> *Leave is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Prof. Tax</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('profTax')?.invalid &&
+                          addSalary.get('profTax')?.touched
+                        "
+                        formControlName="profTax"
+                        placeholder="Enter Prof. Tax"
+                      />
+                      @if (addSalary.get('profTax')?.invalid &&
+                      addSalary.get('profTax')?.touched) {
+                      <div>
+                        @if (addSalary.get('profTax')?.invalid &&
+                        addSalary.get('profTax')?.touched) {
+                        <small class="text-danger">
+                          *Proffesional tax is required</small
+                        >
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for=""
+                        >Labour Welfare</label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('labour')?.invalid &&
+                          addSalary.get('labour')?.touched
+                        "
+                        formControlName="labour"
+                        placeholder="Enter Labour Welfare"
+                      />
+                      @if (addSalary.get('labour')?.invalid &&
+                      addSalary.get('labour')?.touched) {
+                      <div>
+                        @if (addSalary.get('labour')?.invalid &&
+                        addSalary.get('labour')?.touched) {
+                        <small class="text-danger">
+                          *Labour Welfare is required</small
+                        >
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="input-block mb-3">
+                      <label class="col-form-label" for="">Others</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        [class.invalid]="
+                          addSalary.get('othersDed')?.invalid &&
+                          addSalary.get('othersDed')?.touched
+                        "
+                        formControlName="othersDed"
+                        placeholder="Other"
+                      />
+                      @if (addSalary.get('othersDed')?.invalid &&
+                      addSalary.get('othersDed')?.touched) {
+                      <div>
+                        @if (addSalary.get('othersDed')?.invalid &&
+                        addSalary.get('othersDed')?.touched) {
+                        <small class="text-danger"> *Others is required</small>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="submit-section">
+                  <button
+                    class="btn btn-primary submit-btn"
+                    (click)="onSubmit('salary')"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="preview">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="page-title">Offer letter preview</h3>
+              <div class="input-block mb-3">
+                <label class="col-form-label">Offer letter template</label>
+                <angular-editor
+                  [placeholder]="'Enter text here...'"
+                  [(ngModel)]="editorValue"
+                ></angular-editor>
+              </div>
+              <div class="submit-section">
+                <button
+                  class="btn btn-primary submit-btn"
+                  (click)="onSubmit('preview')"
+                >
+                  Generate pdf
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="send-email">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="input-block mb-3">
+                        <input
+                          type="text"
+                          placeholder="Business Unit"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="input-block mb-3">
+                        <input
+                          type="text"
+                          placeholder="Template Name"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-block mb-3">
+                    <input type="email" placeholder="To" class="form-control" />
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="input-block mb-3">
+                        <input
+                          type="email"
+                          placeholder="Cc"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="input-block mb-3">
+                        <input
+                          type="email"
+                          placeholder="Bcc"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-block mb-3">
+                    <input
+                      type="text"
+                      placeholder="Subject"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="input-block mb-3">
+                    <angular-editor
+                      [placeholder]="'Enter text here...'"
+                      [(ngModel)]="emailValue"
+                    ></angular-editor>
+                  </div>
+
+                  <div class="input-block mb-3">
+                    <h2>Attachments</h2>
+                    <div
+                      class="custom-file-container"
+                      data-upload-id="mySecondImage"
+                    >
+                      <label
+                        >Upload (Allow Multiple)
+                        <a
+                          href="javascript:void(0)"
+                          class="custom-file-container__image-clear"
+                          title="Clear Image"
+                        ></a
+                      ></label>
+                      <ngx-dropzone
+                        (change)="onMultipleSelect($event)"
+                        class="service-upload"
+                        [accept]="
+                          'image/jpeg, image/png, image/jpg, application/pdf'
+                        "
+                      >
+                        @if(multipleFiles.length === 0){
+                        <ngx-dropzone-label
+                          class="drop-browse align-center"
+                          [ngStyle]="{
+                            'pointer-events': isfile ? 'none' : 'all'
+                          }"
+                        >
+                          <span
+                            ><img
+                              src="assets/img/icons/drop-icon.svg"
+                              alt="upload"
+                          /></span>
+                          <div class="d-flex">
+                            Drop your files here or<span
+                              class="text-primary ms-1"
+                              >browse</span
+                            >
+                          </div>
+                          <span class="text-muted">Maximum size: 50MB</span>
+                        </ngx-dropzone-label>
+                        } @for (f of multipleFiles; track f; let i = $index) {
+                        @if(isImageFile(f)){
+                        <div class="preview-img">
+                          <img [src]="fileSrc[i]" alt="" />
+                          <div class="d-flex align-items-center">
+                            <span [matTooltip]="f.name">{{ f.name }}</span>
+                            <i
+                              class="fas fa-trash text-danger"
+                              matTooltip="Delete"
+                              (click)="onRemoveMultiple(f, $event)"
+                            ></i>
+                          </div>
+                        </div>
+                        }@else {
+                        <div class="preview-img">
+                          <img
+                            src="../../../../assets/img/dummy-file.png"
+                            class="docImg"
+                            alt=""
+                          />
+                          <div class="d-flex align-items-center">
+                            <span [matTooltip]="f.name">{{ f.name }}</span>
+
+                            <div class="d-flex gap-3">
+                              <i
+                                class="fas fa-eye text-dark"
+                                matTooltip="Preview"
+                                (click)="previewDoc(fileSrc[i], f, $event)"
+                              ></i>
+                              <i
+                                class="fas fa-trash text-danger"
+                                matTooltip="Delete"
+                                (click)="onRemoveMultiple(f, $event)"
+                              ></i>
+                            </div>
+                          </div>
+                        </div>
+
+                        } }
+                      </ngx-dropzone>
+                    </div>
+                  </div>
+                  <div class="input-block mb-3 mb-0">
+                    <div class="text-center">
+                      <button class="btn btn-primary me-1">
+                        <span>Send</span>
+                      </button>
+                      <button class="btn btn-secondary me-1" type="button">
+                        <span>Cancel</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

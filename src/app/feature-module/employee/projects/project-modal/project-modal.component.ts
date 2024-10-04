@@ -1,41 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-project-modal',
   templateUrl: './project-modal.component.html',
-  styleUrls: ['./project-modal.component.scss']
+  styleUrls: ['./project-modal.component.scss'],
 })
 export class ProjectModalComponent implements OnInit {
-  public addProjectForm!: FormGroup ;
-  public editProjectForm!: FormGroup ;
-  constructor(  private formBuilder: FormBuilder,) { }
+  public projectForm!: FormGroup;
+  constructor() {}
 
   ngOnInit(): void {
-     //Add Projects form
-     this.addProjectForm = this.formBuilder.group({
-      projectName: ["", [Validators.required]],
-      projectDescription: ["", [Validators.required]],
-      projectStartDate: ["", [Validators.required]],
-      projectEndDate: ["", [Validators.required]],
-      projectPriority: ["", [Validators.required]],
-      projectLeader: ["", [Validators.required]],
-      addTeamMembers: ["", [Validators.required]],
-      projectId: ["", [Validators.required]],
-      id: ["", [Validators.required]],
-    });
-
-    //Edit Projects Form
-    this.editProjectForm = this.formBuilder.group({
-      editProjectName: ["", [Validators.required]],
-      editProjectDescription: ["", [Validators.required]],
-      editProjectStartDate: ["", [Validators.required]],
-      editProjectEndDate: ["", [Validators.required]],
-      editProjectPriority: ["", [Validators.required]],
-      editaddTeamMembers: ["", [Validators.required]],
-      editProjectId: ["", [Validators.required]],
-      editId: ["", [Validators.required]],
-    });
+    this.projectFormInit();
   }
 
+  private projectFormInit(): void {
+    this.projectForm = new FormGroup({
+      projectName: new FormControl('', Validators.required),
+      client: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
+      rate: new FormControl('', Validators.required),
+      timeFormat: new FormControl('', Validators.required),
+      priority: new FormControl('', Validators.required),
+      projectManager: new FormControl('', Validators.required),
+      team: new FormControl('', Validators.required),
+      productOwner: new FormControl('', Validators.required),
+      scrumMaster: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      file: new FormControl('', Validators.required),
+    });
+  }
 }
