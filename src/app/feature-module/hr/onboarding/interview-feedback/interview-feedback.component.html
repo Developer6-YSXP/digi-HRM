@@ -1,0 +1,130 @@
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Interview Feedback Form</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Interview Feedback Form</li>
+          </ul>
+        </div>
+        <!-- <div class="col-auto float-end ms-auto">
+          <a class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_document"><i
+          class="la la-plus-circle"></i>
+        Add Appointment</a>
+      </div> -->
+    </div>
+  </div>
+  
+<!-- /Page Header -->
+<div class="container mt-4">
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+       
+      <!-- Interviewer Name -->
+      <div class="form-group">
+        <label for="interviewerName">Interviewer Name</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="interviewerName"
+          formControlName="interviewerName"
+          placeholder="Enter Interviewer Name"
+          required
+        />
+      </div>
+  
+      <!-- Interviewee Name -->
+      <div class="form-group mt-3">
+        <label for="intervieweeName">Interviewee Name</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="intervieweeName"
+          formControlName="intervieweeName"
+          placeholder="Enter Interviewee Name"
+          required
+        />
+      </div>
+  
+      <!-- Rating (1-5) -->
+      <div class="form-group mt-3">
+        <label for="rating">Rating (1-5)</label>
+        <select class="form-control mt-2" id="rating" formControlName="rating">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+  
+      <!-- Comments -->
+      <div class="form-group mt-3">
+        <label for="comments">Comments</label>
+        <textarea
+          class="form-control mt-2"
+          id="comments"
+          formControlName="comments"
+          placeholder="Enter your comments here"
+        ></textarea>
+      </div>
+  
+      <!-- Submission Status -->
+      <div class="form-group mt-3">
+        <label for="status">Submission Status</label>
+        <select class="form-control mt-2" id="status" formControlName="status">
+          <option value="Pending">Pending</option>
+          <option value="Submitted">Submitted</option>
+        </select>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary mt-4" [disabled]="feedbackForm.invalid">
+        Submit Feedback
+      </button>
+    </form>
+  </div>
+  
+
+  <div class="container mt-4">
+    <h3>Interview Feedback Summary</h3>
+    
+    <!-- Feedback Table -->
+    <div class="table-responsive table-newdatatable">
+    <table class="table table-new custom-table mb-0 datatable">
+      <thead>
+        <tr>
+          <th>Interviewer</th>
+          <th>Interviewee</th>
+          <th>Rating</th>
+          <th>Comments</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedbackList">
+          <td>{{ feedback.interviewerName }}</td>
+          <td>{{ feedback.intervieweeName }}</td>
+          <td>{{ feedback.rating }}</td>
+          <td>{{ feedback.comments }}</td>
+          <td>{{ feedback.status }}</td>
+          <td>
+            <button
+              class="btn btn-info"
+              (click)="viewFeedback(feedback)"
+              [disabled]="feedback.status === 'Pending'"
+            >
+              View
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </div>

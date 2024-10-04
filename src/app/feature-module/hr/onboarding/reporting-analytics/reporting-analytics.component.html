@@ -1,0 +1,89 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Onboarding Analytics Dashboard</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Onboarding Analytics Dashboard</li>
+          </ul>
+        </div>
+      
+    </div>
+  </div>
+  
+<!-- /Page Header -->
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-3 mb-3">
+          <h5>Time to Hire</h5>
+          <p>{{ dashboardMetrics.timeToHire }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 mb-3">
+          <h5>Completion Rate</h5>
+          <p>{{ dashboardMetrics.completionRate }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 mb-3">
+          <h5>Feedback Score</h5>
+          <p>{{ dashboardMetrics.feedbackScore }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Report Generation Section -->
+    <h2>Generate Reports</h2>
+    <form class="mb-4">
+      <div class="form-group">
+        <label for="reportType">Select Report Type</label>
+        <select [(ngModel)]="reportType" id="reportType" class="form-control mt-2" name="reportType">
+          <option value="" disabled selected>Select report</option>
+          <option value="Onboarding Summary">Onboarding Summary</option>
+          <option value="Time-to-Hire Analysis">Time-to-Hire Analysis</option>
+          <option value="Completion Rate Overview">Completion Rate Overview</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-primary mt-2" (click)="generateReport()">Generate Report</button>
+    </form>
+  
+    <!-- Schedule Report Section -->
+    <h2>Schedule Reports</h2>
+    <form class="mb-4">
+      <div class="form-group">
+        <label for="scheduleDate">Select Schedule Date</label>
+        <input type="date" id="scheduleDate" class="form-control mt-2" [(ngModel)]="scheduleDate" name="scheduleDate" />
+      </div>
+      <button type="button" class="btn btn-primary mt-2" (click)="scheduleReport()">Schedule Report</button>
+    </form>
+  
+    <!-- Reports Table -->
+    <h2>Generated Reports</h2>
+    <div class="table-responsive table-newdatatable">
+        <table class="table table-new custom-table mb-0 datatable">
+      <thead>
+        <tr>
+          <th>Report Name</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td>{{ report.reportName }}</td>
+          <td>{{ report.date }}</td>
+          <td>{{ report.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <!-- Export Data Section -->
+    <button class="btn btn-secondary mt-2" (click)="exportData()">Export Data as CSV</button>
+  </div>
+</div>  

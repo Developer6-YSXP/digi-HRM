@@ -1,0 +1,137 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Payroll Configuration</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Payroll Configuration/li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  
+<!-- /Page Header -->
+
+<div class="container mt-4">
+    <form [formGroup]="payrollForm" (ngSubmit)="onSubmit()">
+     
+  
+      <!-- Location Dropdown -->
+      <div class="form-group">
+        <label for="location">Location</label>
+        <select class="form-control mt-2 mt-2" id="location" formControlName="location">
+          <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+        </select>
+      </div>
+  
+      <!-- Job Role Dropdown -->
+      <div class="form-group mt-3">
+        <label for="jobRole">Job Role</label>
+        <select class="form-control mt-2 mt-2" id="jobRole" formControlName="jobRole">
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+      </div>
+  
+      <!-- Payroll Frequency Dropdown -->
+      <div class="form-group mt-3">
+        <label for="frequency">Payroll Frequency</label>
+        <select class="form-control mt-2 mt-2" id="frequency" formControlName="frequency">
+          <option *ngFor="let freq of frequencies" [value]="freq">{{ freq }}</option>
+        </select>
+      </div>
+  
+      <!-- Compliance Rules Checkboxes -->
+      <div class="form-group mt-3">
+        <label>Compliance Rules</label><br />
+        <div *ngFor="let rule of complianceRules">
+          <input type="checkbox" [value]="rule" formControlName="complianceRules" /> {{ rule }}
+        </div>
+      </div>
+  
+      <!-- Salary Details -->
+      <div class="form-group mt-3">
+        <label for="salary">Salary</label>
+        <input type="number" class="form-control mt-2 mt-2" id="salary" formControlName="salary" placeholder="Enter basic salary" />
+      </div>
+      <div class="form-group mt-3">
+        <label for="bonus">Bonus</label>
+        <input type="number" class="form-control mt-2 mt-2" id="bonus" formControlName="bonus" placeholder="Enter bonus" />
+      </div>
+      <div class="form-group mt-3">
+        <label for="deductions">Deductions</label>
+        <input type="number" class="form-control mt-2 mt-2" id="deductions" formControlName="deductions" placeholder="Enter deductions" />
+      </div>
+  
+      <!-- Tax Information -->
+      <div class="form-group mt-3">
+        <label for="taxCode">Tax Code</label>
+        <input type="text" class="form-control mt-2 mt-2" id="taxCode" formControlName="taxCode" placeholder="Enter tax code" />
+      </div>
+      <div class="form-group mt-3">
+        <label for="taxRate">Tax Rate (%)</label>
+        <input type="number" class="form-control mt-2 mt-2" id="taxRate" formControlName="taxRate" placeholder="Enter tax rate" />
+      </div>
+  
+      <!-- Payroll Type Radio Buttons -->
+      <div class="form-group mt-3">
+        <label>Payroll Type</label><br />
+        <input type="radio" formControlName="payrollType" value="full-time" /> Full-time
+        <input type="radio" formControlName="payrollType" value="part-time" class="ms-3" /> Part-time
+        <input type="radio" formControlName="payrollType" value="contractor" class="ms-3" /> Contractor
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary mt-4" [disabled]="payrollForm.invalid">
+        Save Payroll Configuration
+      </button>
+  
+      <!-- Validation Messages -->
+      <div *ngIf="payrollForm.invalid && payrollForm.touched" class="text-danger mt-2">
+        <p *ngIf="payrollForm.controls['taxCode'].hasError('required')">Tax code is required.</p>
+      </div>
+    </form>
+  </div>
+
+  
+  <div class="container mt-4">
+    <h3>Audit Trail</h3>
+    <div class="table-responsive table-newdatatable"> 
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Change Date</th>
+          <th>Location</th>
+          <th>Job Role</th>
+          <th>Changed By</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of auditLogs">
+          <td>{{ log.date }}</td>
+          <td>{{ log.location }}</td>
+          <td>{{ log.jobRole }}</td>
+          <td>{{ log.changedBy }}</td>
+          <td>{{ log.details }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <h3 class="mt-4">Compliance Checklist</h3>
+    <ul>
+      <li *ngFor="let item of complianceChecklist">{{ item }}</li>
+    </ul>
+  </div>
+
+  <div class="container mt-4">
+    <h3>Notifications</h3>
+    <div *ngFor="let alert of alerts" class="alert alert-warning" role="alert">
+      {{ alert.message }}
+    </div>
+  </div>
+</div>
+ 
