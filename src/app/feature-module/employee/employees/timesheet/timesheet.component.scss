@@ -1,0 +1,23 @@
+.reject{
+    background: #ff0000;
+    color: #fff;
+    padding: 6px 9px;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.approve{
+    background: #009e35;
+    color: #fff;
+    padding: 6px 9px;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+
+.date-input3 input{
+    padding: 10px 12px 6px !important;
+}

@@ -16,7 +16,7 @@
                     Edit
                     Project</a>
                 <a [routerLink]="'/projects/task-board'" class="btn btn-white float-end m-r-10 me-2"
-                    data-bs-toggle="tooltip" title="Task Board"><i class="fa-solid fa-bars"></i></a>
+                     matTooltip="Task Board"><i class="fa-solid fa-bars"></i></a>
             </div>
         </div>
     </div>
@@ -423,9 +423,49 @@
                     </ul>
                 </div>
             </div>
+            <div class="card project-user">
+                <div class="card-body">
+                    <h6 class="card-title m-b-20">
+                        Timesheets
+                        <button type="button" class="float-end btn btn-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#assign_user"><i class="la la-plus-circle"></i> Add</button>
+                    </h6>
+                    <ul class="list-box">
+                        <li>
+                            <a [routerLink] = "routes.employeeProfile">
+                                <div class="list-item">
+                                    <div class="list-left">
+                                        <span class="avatar"><img alt="" src="assets/img/profiles/avatar-2.jpg"></span>
+                                    </div>
+                                    <div class="list-body">
+                                        <span class="message-author">John Doe</span>
+                                        <div class="clearfix"></div>
+                                        <span class="message-content">Web Designer</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink] = "routes.employeeProfile">
+                                <div class="list-item">
+                                    <div class="list-left">
+                                        <span class="avatar"><img alt="" src="assets/img/profiles/avatar-9.jpg"></span>
+                                    </div>
+                                    <div class="list-body">
+                                        <span class="message-author">Richard Miles</span>
+                                        <div class="clearfix"></div>
+                                        <span class="message-content">Web Developer</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 <!-- /Page Content -->
 <!-- Assign Leader Modal -->
 <div id="assign_leader" class="modal custom-modal fade" role="dialog">

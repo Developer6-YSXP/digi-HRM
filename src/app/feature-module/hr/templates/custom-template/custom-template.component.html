@@ -1,0 +1,163 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 class="page-title">Custom Email Template</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="routes.adminDashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Custom Email Template</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <input
+                    type="text"
+                    placeholder="Business Unit"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <input
+                    type="text"
+                    placeholder="Template Name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="input-block mb-3">
+              <input type="email" placeholder="To" class="form-control" />
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <input type="email" placeholder="Cc" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <input type="email" placeholder="Bcc" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="input-block mb-3">
+              <input type="text" placeholder="Subject" class="form-control" />
+            </div>
+            <div class="input-block mb-3">
+              <p-editor
+                [style]="{ height: '320px' }"
+                [(ngModel)]="editorValue"
+              />
+            </div>
+
+            <div class="input-block mb-3">
+              <h2>Attachments</h2>
+              <div class="custom-file-container" data-upload-id="mySecondImage">
+                <label
+                  >Upload (Allow Multiple)
+                  <a
+                    href="javascript:void(0)"
+                    class="custom-file-container__image-clear"
+                    title="Clear Image"
+                  ></a
+                ></label>
+                <ngx-dropzone
+                  (change)="onMultipleSelect($event)"
+                  class="service-upload"
+                  [accept]="'image/jpeg, image/png, image/jpg, application/pdf'"
+                >
+                  @if(multipleFiles.length === 0){
+                  <ngx-dropzone-label
+                    class="drop-browse align-center"
+                    [ngStyle]="{
+                      'pointer-events': isfile ? 'none' : 'all'
+                    }"
+                  >
+                    <span
+                      ><img src="assets/img/icons/drop-icon.svg" alt="upload"
+                    /></span>
+                    <div class="d-flex">
+                      Drop your files here or<span class="text-primary ms-1"
+                        >browse</span
+                      >
+                    </div>
+                    <span class="text-muted">Maximum size: 50MB</span>
+                  </ngx-dropzone-label>
+                  } @for (f of multipleFiles; track f; let i = $index) {
+                  @if(isImageFile(f)){
+                  <div class="preview-img">
+                    <img [src]="fileSrc[i]" alt="" />
+                    <div class="d-flex align-items-center">
+                      <span [matTooltip]="f.name">{{ f.name }}</span>
+                      <i
+                        class="fas fa-trash text-danger"
+                        matTooltip="Delete"
+                        (click)="onRemoveMultiple(f, $event)"
+                      ></i>
+                    </div>
+                  </div>
+                  }@else {
+                  <div class="preview-img">
+                    <img
+                      src="../../../../assets/img/dummy-file.png"
+                      class="docImg"
+                      alt=""
+                    />
+                    <div class="d-flex align-items-center">
+                      <span [matTooltip]="f.name">{{ f.name }}</span>
+
+                      <div class="d-flex gap-3">
+                        <i
+                          class="fas fa-eye text-dark"
+                          matTooltip="Preview"
+                          (click)="previewDoc(fileSrc[i], f, $event)"
+                        ></i>
+                        <i
+                          class="fas fa-trash text-danger"
+                          matTooltip="Delete"
+                          (click)="onRemoveMultiple(f, $event)"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  } }
+                </ngx-dropzone>
+              </div>
+            </div>
+            <div class="input-block mb-3 mb-0">
+              <div class="text-center">
+                <button class="btn btn-primary me-1">
+                  <span>Save</span>
+                </button>
+                <button class="btn btn-success me-1" type="button">
+                  <span>Preview</span>
+                </button>
+                <button class="btn btn-secondary me-1" type="button">
+                  <span>Cancel</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->

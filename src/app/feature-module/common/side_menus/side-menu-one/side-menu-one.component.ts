@@ -23,7 +23,7 @@ export class SideMenuOneComponent implements OnDestroy, OnInit {
   base = 'dashboard';
   page = '';
   last = '';
-  role!: number;
+  role: number;
   openMenuItem: any = null;
   openSubmenuOneItem: any = null;
   side_bar_data: Array<SideBar> = [];

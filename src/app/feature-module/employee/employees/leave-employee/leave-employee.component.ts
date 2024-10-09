@@ -266,12 +266,100 @@ export class LeaveEmployeeComponent implements OnInit {
   }
 
   exportToExcel(): void {
-    this.exportService.exportToExcel(this.lstLeave, 'export.xlsx');
+    const headerTitle = [
+      'Id',
+      'Employee Name',
+      'Designation',
+      'Leave Type',
+      'From',
+      'To',
+      'No. of days',
+      'Remain Leaves',
+      'Reason',
+      'Status',
+    ];
+
+    const formattedData = [
+      headerTitle,
+      ...this.lstLeave.map((item) => [
+        item.id,
+        item.employeeName,
+        item.designation,
+        item.leaveType,
+        item.from,
+        item.to,
+        item.noofDays,
+        item.remainleaves,
+        item.reason,
+        item.status,
+      ]),
+    ]
+    this.exportService.exportToExcel(formattedData, headerTitle, 'exportLeaveRecord.xlsx');
   }
 
   exportToPdf(): void {
-    this.exportService.exportToPdf(this.lstLeave, 'export.pdf');
-  }
+    if (!this.lstLeave || this.lstLeave.length === 0) {
+        console.error('No leave data available to export.');
+        return;
+    }
+
+
+
+    const headers = Object.keys(this.lstLeave[0]);
+
+    console.log('headers ===>', headers);
+    const headerTitles = [
+        'Id',
+        'Employee Name',
+        'Designation',
+        'Leave Type',
+        'From',
+        'To',
+        'No. of days',
+        'Remain Leaves',
+        'Reason',
+        'Status',
+    ];
+
+    const tableData = this.lstLeave.map(item => headers.map(header => (item as any)[header]));
+
+    const documentDefinition = {
+        content: [
+            { text: 'Leave Record', style: 'header' },
+            {
+                style: 'tableExample',
+                table: {
+                    headerRows: 1,
+                    body: [
+                        headerTitles.map(title => ({ text: title, style: 'tableHeader' })),
+                        ...tableData.map(row => row.map(cell => ({ text: cell, style: 'tableCell' }))),
+                    ],
+                },
+            },
+        ],
+        styles: {
+            header: {
+                fontSize: 18,
+                bold: true,
+                margin: [0, 0, 0, 10], // Add some margin below the header
+            },
+            tableHeader: {
+                fontSize: 10,
+                bold: true,
+                fillColor: '#f0f0f0', // Optional: light gray background for headers
+            },
+            tableCell: {
+                fontSize: 8,
+            },
+            tableExample: {
+                margin: [0, 5, 0, 15] as [number, number, number, number],
+            },
+        },
+    };
+
+    this.exportService.exportToPdf(documentDefinition, 'exportLeaveRecord.pdf');
+}
+
 }
 export interface pageSelection {
   skip: number;

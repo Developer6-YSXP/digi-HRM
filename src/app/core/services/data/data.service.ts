@@ -117,6 +117,15 @@ export class DataService {
       })
     );
   }
+
+  public getTemplate(): Observable<apiResultFormat> {
+    return this.http.get<apiResultFormat>('assets/JSON/templates.json').pipe(
+      map((res: apiResultFormat) => {
+        return res;
+      })
+    );
+  }
+
   public getInvoice(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/JSON/invoice-page.json').pipe(
       map((res: apiResultFormat) => {
@@ -1016,6 +1025,38 @@ export class DataService {
 
       menu: [
         {
+          menuValue: 'Onboarding',
+          route: routes.onboarding,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'chalkboard',
+          base: 'onboarding',
+          materialicons: 'chalkboard',
+          subMenus: [
+            {
+              menuValue: 'Offer Letter Generation',
+              route: routes.offerLetterGeneration,
+              base: 'offer-letter',
+            },
+          ],
+        },
+        {
+          menuValue: 'Templates',
+          route: routes.templates,
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'shapes',
+          base: 'templates',
+          materialicons: 'shapes',
+          subMenus: [
+            {
+              menuValue: 'Custom Email Template',
+              route: routes.customTemplate,
+              base: 'custom-template',
+            },
+          ],
+        },
+        {
           menuValue: 'Sales',
           route: routes.sales,
           hasSubRoute: true,
@@ -1819,6 +1860,11 @@ export class DataService {
               route: routes.taskboard,
               base: 'task-board',
             },
+            {
+              menuValue: 'Integration Settings',
+              route: routes.integartionSetting,
+              base: 'integration-setting',
+            },
           ],
         },
         {
@@ -1865,12 +1911,7 @@ export class DataService {
               menuValue: 'General Settings',
               route: routes.generalSetting,
               base: 'general-setting',
-            },
-            {
-              menuValue: 'Integration Settings',
-              route: routes.integartionSetting,
-              base: 'integration-setting',
-            },
+            },           
             {
               menuValue: 'Notification Setttings',
               route: routes.notificationSetting,

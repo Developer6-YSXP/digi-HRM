@@ -11,101 +11,19 @@ export class ExportService {
     (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
   }
 
-  exportToPdf(data: any[], filename: string): void {
+  exportToPdf(data: any, filename: string): void {
     if (data.length === 0) {
       console.error('No data available for export.');
       return;
     }
-
-    const headers = Object.keys(data[0]);
-    const headerTitle = [
-      'Id',
-      'Employee Name',
-      'Designation',
-      'Leave Type',
-      'From',
-      'To',
-      'No. of days',
-      'Remain Leaves',
-      'Reason',
-      'Status',
-    ];
-
-    const tableData = data.map((item) => headers.map((header) => item[header]));
-
-    const documentDefinition = {
-      content: [
-        { text: 'Leave Record', style: 'header' },
-        {
-          style: 'tableExample',
-          table: {
-            headerRows: 1,
-            body: [
-              headerTitle.map((header) => ({
-                text: header,
-                style: 'tableHeader',
-              })),
-              ...tableData.map((row) =>
-                row.map((cell) => ({ text: cell, style: 'tableCell' }))
-              ),
-            ],
-          },
-        },
-      ],
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-        },
-        tableHeader: {
-          fontSize: 10,
-          bold: true,
-        },
-        tableCell: {
-          fontSize: 8,
-        },
-        tableExample: {
-          margin: [0, 5, 0, 15] as [number, number, number, number],
-        },
-      },
-    };
-
-    pdfMake.createPdf(documentDefinition).download(filename);
+    pdfMake.createPdf(data).download(filename);
   }
 
-  exportToExcel(data: any[], filename: string): void {
-    const headerTitle = [
-      'Id',
-      'Employee Name',
-      'Designation',
-      'Leave Type',
-      'From',
-      'To',
-      'No. of days',
-      'Remain Leaves',
-      'Reason',
-      'Status',
-    ];
+  exportToExcel(data: any[], header:string[], filename: string): void {
 
-    const formattedData = [
-      headerTitle,
-      ...data.map((item) => [
-        item.id,
-        item.employeeName,
-        item.designation,
-        item.leaveType,
-        item.from,
-        item.to,
-        item.noofDays,
-        item.remainleaves,
-        item.reason,
-        item.status,
-      ]),
-    ];
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
 
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(formattedData);
-
-    const colWidths = headerTitle.map((header, i) => {
+    const colWidths = header.map((header, i) => {
       const maxLength = Math.max(
         header.length,
         ...data.map((item) => String(item[Object.keys(item)[i]]).length)

@@ -1691,3 +1691,26 @@ mat-tooltip-component .mat-mdc-tooltip .mdc-tooltip__surface {
 .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
   display: none;
 }
+
+angular-editor {
+  ul {
+    list-style-type: disc !important; /* or circle, square, etc. */
+    margin-left: 20px !important; /* Adjust as needed */
+  }
+
+  ol {
+    list-style-type: decimal !important; /* or lower-alpha, upper-alpha, etc. */
+    margin-left: 20px !important; /* Adjust as needed */
+  }
+  .angular-editor {
+    margin: 10px 0 !important;
+  }
+
+  .angular-editor ul {
+    padding-left: 20px !important; /* Indentation for ul */
+  }
+
+  .angular-editor ol {
+    padding-left: 20px !important; /* Indentation for ol */
+  }
+}

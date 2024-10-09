@@ -248,6 +248,13 @@ export interface getInvoice {
   status: string;
 }
 
+export interface getTemplates {
+  id: number;
+  number: string;
+  name: string;
+  status: string;
+}
+
 export interface items {
   item: string;
   description: string;
@@ -708,6 +715,7 @@ export interface getTimeSheet {
   assignedhours: string;
   hrs: string;
   description: string;
+  status:string;
   img: string;
 }
 export interface getShiftSchedule {
@@ -748,10 +756,10 @@ export interface getLeave {
   employeeName: string;
   designation: string;
   leaveType: string;
-  from: string;
-  to: string;
-  noofDays: string;
-  remainleaves: string;
+  from: Date;
+  to: Date;
+  noofDays: number;
+  remainleaves: number;
   reason: string;
   status: string;
 }

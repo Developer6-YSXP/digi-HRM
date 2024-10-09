@@ -12,7 +12,11 @@
           <li class="breadcrumb-item active">Timesheet</li>
         </ul>
       </div>
-      <div class="col-auto float-end ms-auto">
+      <div class="col-auto float-end ms-auto d-flex gap-3">
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-white" (click)="exportToExcel()">Excel</button>
+          <button class="btn btn-white" (click)="exportToPdf()">PDF</button>
+        </div>
         <a
           class="btn add-btn"
           data-bs-toggle="modal"
@@ -23,6 +27,87 @@
     </div>
   </div>
   <!-- /Page Header -->
+
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card">
+         <div class="card-body">
+          <div id="radial-chart">
+            <apx-chart
+              [series]="chartOptionsEight.series"
+              [chart]="chartOptionsEight.chart"
+              [plotOptions]="chartOptionsEight.plotOptions"
+              [labels]="chartOptionsEight.labels"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6">
+      <div class="card">       
+        <div class="card-body">
+          <div class="chart">
+            <apx-chart 
+            style="height: 200px;"
+              [series]="chartOptionsTwo.series"
+              [chart]="chartOptionsTwo.chart"
+              [xaxis]="chartOptionsTwo.xaxis"
+              [stroke]="chartOptionsTwo.stroke"
+              [dataLabels]="chartOptionsTwo.dataLabels"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Search Filter -->
+    <div class="row filter-row">
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block date-input3 mb-3 form-focus inputs">
+          <div class="cal-icon">
+            <input
+              class="form-control datetimepicker "
+              bsDatepicker
+              container=".date-input3"
+              type="text"
+              placeholder="Select Date"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3 form-focus inputs">
+          <mat-form-field class="example-full-width">
+            <mat-label>Employee Name</mat-label>
+            <input type="text" matInput class="form-control floating" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3 form-focus select-focus select">
+          <mat-select
+            [(value)]="selected"
+            class="custom-mat-select floating-mat-select"
+          >
+           <mat-option value="office">Office Management</mat-option>
+                <mat-option value="project">Project Management</mat-option>
+                <mat-option value="call">Video Calling App</mat-option>
+                <mat-option value="hospital"
+                  >Hospital Administration</mat-option
+                >
+          </mat-select>
+          <label class="focus-label">Projects</label>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <a class="btn btn-success w-100"> Search </a>
+      </div>
+    </div>
+    <!-- /Search Filter -->
 
   <div class="row">
     <div class="col-md-12">
@@ -56,7 +141,10 @@
         >
           <thead>
             <tr>
+              <th class="text-end">Actions</th>
+              @if(role === 0){
               <th mat-sort-header="employee">Employee</th>
+              }
               <th mat-sort-header="date">Date</th>
               <th mat-sort-header="project">Projects</th>
               <th mat-sort-header="assignedhours" class="text-center">
@@ -66,32 +154,30 @@
               <th mat-sort-header="description" class="d-none d-sm-table-cell">
                 Description
               </th>
-              <th class="text-end">Actions</th>
+              @if(designation !== 'manager'){
+
+                <th mat-sort-header="status" class="d-none d-sm-table-cell">
+                  Status
+                </th>
+              }
             </tr>
           </thead>
           <tbody>
             @for (item of lstTimesheet; track item; let i = $index) {
             <tr>
+              @if(designation === 'manager'){
               <td>
-                <h2 class="table-avatar">
-                  <a [routerLink]="routes.employeeProfile" class="avatar"
-                    ><img alt="" [src]="item.img"
-                  /></a>
-                  <a [routerLink]="routes.employeeProfile"
-                    >{{ item.employee }} <span>{{ item.designation }} </span></a
-                  >
-                </h2>
+                <div class="d-flex gap-3">
+                  <span matTooltip="Approve" class="approve">
+                    <i class="fa-solid fa-check"></i>
+                  </span>
+                  <span matTooltip="Reject" class="reject">
+                    <i class="fa-solid fa-xmark"></i>
+                  </span>
+                </div>
               </td>
-              <td>{{ item.date }}</td>
+              }@else {
               <td>
-                <h2>{{ item.project }}</h2>
-              </td>
-              <td class="text-center">{{ item.assignedhours }}</td>
-              <td class="text-center">{{ item.hrs }}</td>
-              <td class="d-none d-sm-table-cell col-md-4">
-                {{ item.description }}
-              </td>
-              <td class="text-end">
                 <div class="dropdown dropdown-action">
                   <a
                     class="action-icon dropdown-toggle"
@@ -115,6 +201,43 @@
                   </div>
                 </div>
               </td>
+              } @if(role === 0){
+              <td>
+                <h2 class="table-avatar">
+                  <a [routerLink]="routes.employeeProfile" class="avatar"
+                    ><img alt="" [src]="item.img"
+                  /></a>
+
+                  <a [routerLink]="routes.employeeProfile"
+                    >{{ item.employee }} <span>{{ item.designation }} </span></a
+                  >
+                </h2>
+              </td>
+              }
+              <td>{{ item.date }}</td>
+              <td>
+                <h2>{{ item.project }}</h2>
+              </td>
+              <td class="text-center">{{ item.assignedhours }}</td>
+              <td class="text-center">{{ item.hrs }}</td>
+              <td class="d-none d-sm-table-cell col-md-4">
+                {{ item.description }}
+              </td>
+              @if(designation !== 'manager'){
+                <td class="d-none d-sm-table-cell col-md-4">
+                  <span
+                    [ngClass]="
+                      item.status === 'Approved'
+                        ? 'badge bg-inverse-success'
+                        : item.status === 'Rejected'
+                        ? 'badge bg-inverse-danger'
+                        : 'badge bg-inverse-info'
+                    "
+                  >
+                    {{ item.status }}</span
+                  >
+                </td>
+              }
             </tr>
             } @if (lstTimesheet.length === 0) {
             <tr>
@@ -243,7 +366,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="timesheetForm">
           <div class="row">
             <div class="input-block mb-3 col-sm-6">
               <label class="col-form-label" for=""
@@ -252,6 +375,7 @@
               <mat-select
                 class="custom-mat-select"
                 placeholder="Office Management"
+                formControlName="project"
               >
                 <mat-option value="office">Office Management</mat-option>
                 <mat-option value="project">Project Management</mat-option>
@@ -268,6 +392,7 @@
               <mat-select
                 class="custom-mat-select"
                 placeholder="Patient appointment booking"
+                formControlName="task"
               >
                 <mat-option value="office"
                   >Patient appointment booking</mat-option
@@ -291,7 +416,7 @@
                 <input
                   class="form-control"
                   type="text"
-                  value="5 May 2023"
+                  formControlName="deadline"
                   readonly
                 />
               </div>
@@ -300,13 +425,13 @@
               <label class="col-form-label" for=""
                 >Total Hours <span class="text-danger">*</span></label
               >
-              <input class="form-control" type="text" value="100" readonly />
+              <input class="form-control" type="text" value="100" readonly formControlName="totalHours" />
             </div>
             <div class="input-block mb-3 col-sm-4">
               <label class="col-form-label" for=""
                 >Remaining Hours <span class="text-danger">*</span></label
               >
-              <input class="form-control" type="text" value="60" readonly />
+              <input class="form-control" type="text" value="60" readonly  formControlName="remainingHours"/>
             </div>
           </div>
           <div class="row">
@@ -320,6 +445,7 @@
                   bsDatepicker
                   container=".date-input1"
                   type="text"
+                  formControlName="date"
                 />
               </div>
             </div>
@@ -327,14 +453,14 @@
               <label class="col-form-label" for=""
                 >Hours <span class="text-danger">*</span></label
               >
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="hours"/>
             </div>
           </div>
           <div class="input-block mb-3">
             <label class="col-form-label" for=""
               >Description <span class="text-danger">*</span></label
             >
-            <textarea rows="4" class="form-control"></textarea>
+            <textarea rows="4" class="form-control" formControlName="description"></textarea>
           </div>
           <div class="submit-section">
             <button class="btn btn-primary submit-btn">Submit</button>
@@ -362,7 +488,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="timesheetForm">
           <div class="row">
             <div class="input-block mb-3 col-sm-6">
               <label class="col-form-label" for=""
@@ -371,6 +497,7 @@
               <mat-select
                 class="custom-mat-select"
                 placeholder="Office Management"
+                formControlName="project"
               >
                 <mat-option value="office">Office Management</mat-option>
                 <mat-option value="project">Project Management</mat-option>
@@ -390,6 +517,7 @@
                 <input
                   class="form-control"
                   type="text"
+                  formControlName="deadline"
                   value="5 May 2023"
                   readonly
                 />
@@ -399,13 +527,13 @@
               <label class="col-form-label" for=""
                 >Total Hours <span class="text-danger">*</span></label
               >
-              <input class="form-control" type="text" value="100" readonly />
+              <input class="form-control" type="text" value="100" readonly formControlName="totalHours" />
             </div>
             <div class="input-block mb-3 col-sm-4">
               <label for=""
                 >Remaining Hours <span class="text-danger">*</span></label
               >
-              <input class="form-control" type="text" value="60" readonly />
+              <input class="form-control" type="text" value="60" readonly formControlName="remainingHours" />
             </div>
           </div>
           <div class="row">
@@ -420,6 +548,7 @@
                   container=".date-input2"
                   type="text"
                   value="31-12-2022"
+                  formControlName="date"
                 />
               </div>
             </div>
@@ -427,15 +556,15 @@
               <label class="col-form-label" for=""
                 >Hours <span class="text-danger">*</span></label
               >
-              <input class="form-control" type="text" value="9" />
+              <input class="form-control" type="text" value="9" formControlName="hours"/>
             </div>
           </div>
           <div class="input-block mb-3">
             <label class="col-form-label" for=""
               >Description <span class="text-danger">*</span></label
             >
-            <textarea rows="4" class="form-control">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel elit neque.</textarea
+            <textarea rows="4" class="form-control" formControlName="description">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel elit neque.</textarea
             >
           </div>
           <div class="submit-section">
